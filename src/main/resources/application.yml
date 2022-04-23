@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/monitoring_system?user=capstone_team
-    username: team2
-    password: 1212
+    username: capstone_team
+    password: 1313
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
