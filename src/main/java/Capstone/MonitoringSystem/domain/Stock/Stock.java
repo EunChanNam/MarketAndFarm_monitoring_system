@@ -31,4 +31,15 @@ public class Stock {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storage_id")
     private Storage storage;
+
+    public void addStorage(Storage storage) {
+        storage.getStocks().add(this);
+        setStorage(storage);
+    }
+
+    public void removeStorage() {
+        getStorage().getStocks()
+                .removeIf(s -> s.getId().equals(getId()));
+        setStorage(null);
+    }
 }

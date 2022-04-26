@@ -31,4 +31,20 @@ public class Release {
     private Stock stock;
 
     private LocalDate releasedDate;
+
+    public void addCompany(Company company) {
+        setCompany(company);
+    }
+
+    public void removeCompany() {
+        setCompany(null);
+    }
+
+    public void addStock(Stock stock) {
+        setStock(stock);
+    }
+
+    public void removeStock() {
+        setStock(null);
+    }
 }
