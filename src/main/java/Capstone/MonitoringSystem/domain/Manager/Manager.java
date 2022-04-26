@@ -15,6 +15,7 @@ public class Manager {
 
     private String name;
 
+    @Column(unique = true)
     private String loginId;
 
     private String pw;
