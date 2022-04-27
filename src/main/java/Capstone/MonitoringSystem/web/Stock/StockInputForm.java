@@ -2,6 +2,7 @@ package Capstone.MonitoringSystem.web.Stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -18,6 +19,7 @@ public class StockInputForm {
 
     private Integer price;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate stockedDate;
 
     private Double yield;
