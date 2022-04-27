@@ -19,15 +19,15 @@ public class Stock {
     private String name;
 
     private String dryingPlace;
-
+    
     @Column(name = "stock_quantity")
-    private double quantity;
+    private Double quantity;
 
-    private int price;
+    private Integer price;
 
     private LocalDate stockedDate;
 
-    private double yield;
+    private Double yield;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storage_id")
@@ -44,18 +44,18 @@ public class Stock {
         setStorage(null);
     }
 
-    public void reduceStock(double quantity) {
+    public void reduceStock(Double quantity) {
         this.quantity -= quantity;
     }
 
-    public static Stock createStock(Long id, String name, String dryingPlace, double quantity, int price, LocalDate stockedDate,
-                                    double yield, Storage storage) {
+    public static Stock createStock(Long id, String name, String dryingPlace, Double quantity, Integer price, LocalDate stockedDate,
+                                    Double yield, Storage storage) {
         Stock stock = new Stock(id, name, dryingPlace, quantity, price, stockedDate, yield);
         stock.addStorage(storage);
         return stock;
     }
 
-    public Stock(Long id, String name, String dryingPlace, double quantity, int price, LocalDate stockedDate, double yield) {
+    public Stock(Long id, String name, String dryingPlace, Double quantity, Integer price, LocalDate stockedDate, Double yield) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;

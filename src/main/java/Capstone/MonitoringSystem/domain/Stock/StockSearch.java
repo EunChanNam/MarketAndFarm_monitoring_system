@@ -8,5 +8,5 @@ public class StockSearch {
 
     private String name;
 
-    private Integer date;
+    private Integer  date;
 }

@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -98,28 +97,31 @@
                     <div class="heading-underline">
                         <h5 class="m-b-30">입고LIST 입력</h5>
                     </div>
-                    <form>
+                    <form th:action="@{/stocks/new}" method="post" th:object="${form}">
                         <div class="row form-row">
                             <div class="col-md-12 form-group">
-                                <input class="form-control" type="text" placeholder="B/L넘버">
+                                <input th:field="*{id}" class="form-control" type="text" placeholder="B/L넘버">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input class="form-control" type="text" placeholder="품종">
+                                <input th:field="*{name}" class="form-control" type="text" placeholder="품종">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input class="form-control" type="text" placeholder="수량(TON)">
+                                <input th:field="*{quantity}" class="form-control" type="text" placeholder="수량(TON)">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input class="form-control" type="text" placeholder="건조장">
+                                <input th:field="*{dryingPlace}" class="form-control" type="text" placeholder="건조장">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input class="form-control" type="text" placeholder="단가">
+                                <input th:field="*{price}" class="form-control" type="text" placeholder="단가">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input class="form-control" type="text" placeholder="입고량">
+                                <input th:field="*{stockedDate}" class="form-control" type="text" placeholder="입고일">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input class="form-control" type="text" placeholder="수율">
+                                <input th:field="*{yield}" class="form-control" type="text" placeholder="수율">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input th:field="*{storageId}" class="form-control" type="text" placeholder="창고 번호">
                             </div>
                         </div>
 <!--                        <%&#45;&#45;                        출고량 출고일 주석처리&#45;&#45;%>-->
@@ -132,7 +134,7 @@
 <!--                            <%&#45;&#45;                            </div>&#45;&#45;%>-->
 <!--                        <%&#45;&#45;                        </div>&#45;&#45;%>-->
                     </form>
-                    <div class="text-right"><a class="btn btn-brand" href="#">Add List</a></div>
+                    <div type="summit" class="text-right"><a class="btn btn-brand" href="#">Add List</a></div>
                 </div>
             </div>
         </div>

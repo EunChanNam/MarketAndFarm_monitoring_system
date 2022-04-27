@@ -22,11 +22,11 @@ public class StockServiceImp implements StockService {
     private final StorageRepository str;
 
     @Transactional
-    public Long saveStock(Long id, String name, String dryingPlace,double quantity, int price,
-                          LocalDate stockedDate, double yield, Long storageId) {
+    public void saveStock(Long id, String name, String dryingPlace,Double quantity, Integer price,
+                          LocalDate stockedDate, Double yield, Long storageId) {
         Storage storage = str.findByIdLazy(id);
         Stock stock = Stock.createStock(id, name, dryingPlace, quantity, price, stockedDate, yield, storage);
-        return sr.save(stock);
+        sr.save(stock);
     }
 
     public List<Stock> findStocksBySearch(StockSearch stockSearch) {

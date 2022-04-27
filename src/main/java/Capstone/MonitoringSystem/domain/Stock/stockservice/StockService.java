@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface StockService {
 
-    public Long saveStock(Long id, String name, String dryingPlace, double quantity, int price,
-                          LocalDate stockedDate, double yield, Long storageId);
+    public void saveStock(Long id, String name, String dryingPlace, Double quantity, Integer price,
+                          LocalDate stockedDate, Double yield, Long storageId);
 
     public List<Stock> findStocksBySearch(StockSearch stockSearch);
 

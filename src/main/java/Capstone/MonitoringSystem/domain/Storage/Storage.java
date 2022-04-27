@@ -19,9 +19,9 @@ public class Storage {
     @Column(name = "storage_name")
     private String name;
 
-    private int temperature;
+    private Integer temperature;
 
-    private int humidity;
+    private Integer humidity;
 
     @OneToMany(mappedBy = "storage")
     private List<Stock> stocks;

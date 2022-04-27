@@ -10,5 +10,5 @@ public class ReleaseSearch {
 
     private String name;
 
-    private Integer date;
+    private Integer  date;
 }

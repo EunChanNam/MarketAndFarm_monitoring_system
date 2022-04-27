@@ -18,9 +18,9 @@ public class Release {
     @Column(name = "release_id")
     private Long id;
 
-    private int price;
+    private Integer price;
 
-    private double quantity;
+    private Double quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
@@ -48,7 +48,7 @@ public class Release {
         setStock(null);
     }
 
-    public static Release createRelease(int price, double quantity, LocalDate releasedDate,
+    public static Release createRelease(Integer price, Double quantity, LocalDate releasedDate,
                                         Stock stock, Company company) {
         Release release = new Release(price, quantity, releasedDate);
         release.addStock(stock);
@@ -57,7 +57,7 @@ public class Release {
         return release;
     }
 
-    public Release(int price, double quantity, LocalDate releasedDate) {
+    public Release(Integer price, Double quantity, LocalDate releasedDate) {
         this.price = price;
         this.quantity = quantity;
         this.releasedDate = releasedDate;
