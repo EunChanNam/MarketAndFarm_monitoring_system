@@ -47,4 +47,22 @@ public class Release {
     public void removeStock() {
         setStock(null);
     }
+
+    public static Release createRelease(int price, double quantity, LocalDate releasedDate,
+                                        Stock stock, Company company) {
+        Release release = new Release(price, quantity, releasedDate);
+        release.addStock(stock);
+        release.addCompany(company);
+        release.getStock().reduceStock(quantity);
+        return release;
+    }
+
+    public Release(int price, double quantity, LocalDate releasedDate) {
+        this.price = price;
+        this.quantity = quantity;
+        this.releasedDate = releasedDate;
+    }
+
+    protected Release() {
+    }
 }

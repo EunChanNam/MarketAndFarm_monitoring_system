@@ -12,8 +12,7 @@ import java.time.LocalDate;
 public class Stock {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "stock_id")
+    @Column(name = "B/L_number")
     private Long id;
 
     @Column(name = "item_name")
@@ -26,7 +25,7 @@ public class Stock {
 
     private LocalDate stockedDate;
 
-    private int yield;
+    private double yield;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storage_id")
@@ -41,5 +40,28 @@ public class Stock {
         getStorage().getStocks()
                 .removeIf(s -> s.getId().equals(getId()));
         setStorage(null);
+    }
+
+    public void reduceStock(double quantity) {
+        this.quantity -= quantity;
+    }
+
+    public static Stock createStock(Long id, String name, double quantity, int price, LocalDate stockedDate,
+                                    double yield, Storage storage) {
+        Stock stock = new Stock(id, name, quantity, price, stockedDate, yield);
+        stock.addStorage(storage);
+        return stock;
+    }
+
+    public Stock(Long id, String name, double quantity, int price, LocalDate stockedDate, double yield) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.stockedDate = stockedDate;
+        this.yield = yield;
+    }
+
+    protected Stock() {
     }
 }
