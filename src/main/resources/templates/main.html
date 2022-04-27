@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Market&fram</title>
+    <title>Market&farm</title>
     <!-- Favicons-->
     <link rel="shortcut icon" href="assets/images/favicon.png">
     <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -43,7 +43,7 @@
 <!--            <%&#45;&#45;            메뉴 리스트&#45;&#45;%>-->
             <div class="inner-nav">
                 <ul>
-                    <li class="menu-item-has-children menu-item-has-mega-menu"><a href="#"><span class="menu-item-span">입고리스트</span></a>
+                    <li class="menu-item-has-children menu-item-has-mega-menu"><a th:href="@{/stocks}" href="#"><span class="menu-item-span">입고리스트</span></a>
 
                     </li>
                     <li class="menu-item-has-children menu-item-has-mega-menu"><a href="#"><span class="menu-item-span">출고리스트</span></a>
@@ -141,7 +141,7 @@
 <!--            <%&#45;&#45;            입고 작성 버튼&#45;&#45;%>-->
             <div class="row">
                 <div class="col-md-12">
-                    <p class="text-center"><a class="btn btn-circle btn-brand" href="#">입고 작성</a></p>
+                    <p class="text-center"><a class="btn btn-circle btn-brand" th:href="@{inputListUpload.html}" href="#">입고 작성</a></p>
                 </div>
             </div>
 

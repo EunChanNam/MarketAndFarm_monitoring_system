@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Stock {
 
     @Id
-    @Column(name = "B/L_number")
+    @Column(name = "stock_id")
     private Long id;
 
     @Column(name = "item_name")
