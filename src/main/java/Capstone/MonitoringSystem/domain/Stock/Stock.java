@@ -20,7 +20,7 @@ public class Stock {
     private String name;
 
     @Column(name = "stock_quantity")
-    private int quantity;
+    private double quantity;
 
     private int price;
 

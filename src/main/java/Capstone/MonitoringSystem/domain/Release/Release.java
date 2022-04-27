@@ -20,7 +20,7 @@ public class Release {
 
     private int price;
 
-    private int quantity;
+    private double quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
