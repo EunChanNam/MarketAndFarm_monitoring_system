@@ -4,10 +4,13 @@ import Capstone.MonitoringSystem.domain.Stock.Stock;
 import Capstone.MonitoringSystem.domain.Stock.StockSearch;
 import Capstone.MonitoringSystem.domain.Stock.StockUpdateForm;
 import Capstone.MonitoringSystem.domain.Stock.stockrepository.StockRepository;
+import Capstone.MonitoringSystem.domain.Storage.Storage;
+import Capstone.MonitoringSystem.domain.Storage.storagerepository.StorageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -16,32 +19,30 @@ import java.util.List;
 public class StockServiceImp implements StockService {
 
     private final StockRepository sr;
+    private final StorageRepository str;
 
-    @Override
     @Transactional
-    public Long saveStock(Stock stock) {
-        sr.save(stock);
-        return stock.getId();
+    public Long saveStock(Long id, String name, double quantity, int price,
+                          LocalDate stockedDate, double yield, Long storageId) {
+        Storage storage = str.findByIdLazy(id);
+        Stock stock = Stock.createStock(id, name, quantity, price, stockedDate, yield, storage);
+        return sr.save(stock);
     }
 
-    @Override
     public List<Stock> findStocksBySearch(StockSearch stockSearch) {
         return sr.findBySearch(stockSearch);
     }
 
-    @Override
     public Stock findStock(Long stockId) {
         return sr.findById(stockId);
     }
 
-    @Override
     @Transactional
     public void removeStock(Long stockId) {
         Stock findStock = sr.findById(stockId);
         sr.remove(findStock);
     }
 
-    @Override
     @Transactional
     public void updateStock(Long stockId, StockUpdateForm form) {
         //StockUpdateForm 정해지면 짜기
