@@ -7,6 +7,7 @@ import Capstone.MonitoringSystem.domain.Stock.stockrepository.StockRepository;
 import Capstone.MonitoringSystem.domain.Storage.Storage;
 import Capstone.MonitoringSystem.domain.Storage.storagerepository.StorageRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class StockServiceImp implements StockService {
 
     private final StockRepository sr;
@@ -24,7 +26,7 @@ public class StockServiceImp implements StockService {
     @Transactional
     public void saveStock(Long id, String name, String dryingPlace,Double quantity, Integer price,
                           LocalDate stockedDate, Double yield, Long storageId) {
-        Storage storage = str.findByIdLazy(id);
+        Storage storage = str.findByIdLazy(storageId);
         Stock stock = Stock.createStock(id, name, dryingPlace, quantity, price, stockedDate, yield, storage);
         sr.save(stock);
     }

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Market&fram</title>
+  <title>Market&farm</title>
   <!-- Favicons-->
   <link rel="shortcut icon" href="assets/images/favicon.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -97,16 +96,21 @@
                 <th data-field="bl_num" data-sortable="true">B/L 넘버</th>
                 <th data-field="kind" data-sortable="true">품종</th>
                 <th data-field="qunatity" data-sortable="true">수량(ton)</th>
-                <th data-field="warehouse" data-sortable="true">창고</th>
                 <th data-field="dry" data-sortable="true">건조장</th>
                 <th data-field="price" data-sortable="true">단가</th>
-                <th data-field="inventory" data-sortable="true">재고량</th>
+                <th data-field="stockedDate" data-sortable="true">입고날짜</th>
+                <th data-field="warehouse" data-sortable="true">창고 번호</th>
                 <th data-field="throughput" data-sortable="true">수율</th>
-                <th data-field="release_quantity" data-sortable="true">출고량</th>
-                <th data-field="release_date" data-sortable="true">출고일</th>
               </tr>
-              <tr class="alaways">
-
+              <tr class="alaways" th:each="stock : ${stocks}">
+                <th th:text="${stock.id}" data-field="bl_num" data-sortable="true">B/L 넘버</th>
+                <th th:text="${stock.name}" data-field="kind" data-sortable="true">품종</th>
+                <th th:text="${stock.quantity}" data-field="qunatity" data-sortable="true">수량(ton)</th>
+                <th th:text="${stock.dryingPlace}" data-field="dry" data-sortable="true">건조장</th>
+                <th th:text="${stock.price}" data-field="price" data-sortable="true">단가</th>
+                <th th:text="${stock.stockedDate}" data-field="stockedDate" data-sortable="true">입고날짜</th>
+                <th th:text="${stock.storage.id}" data-field="warehouse" data-sortable="true">창고 번호</th>
+                <th th:text="${stock.yield}" data-field="throughput" data-sortable="true">수율</th>
               </tr>
               </thead>
             </table>

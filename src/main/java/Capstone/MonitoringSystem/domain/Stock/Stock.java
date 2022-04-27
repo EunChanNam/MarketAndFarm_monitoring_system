@@ -58,6 +58,7 @@ public class Stock {
     public Stock(Long id, String name, String dryingPlace, Double quantity, Integer price, LocalDate stockedDate, Double yield) {
         this.id = id;
         this.name = name;
+        this.dryingPlace = dryingPlace;
         this.quantity = quantity;
         this.price = price;
         this.stockedDate = stockedDate;
