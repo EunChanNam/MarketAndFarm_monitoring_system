@@ -22,10 +22,10 @@ public class StockServiceImp implements StockService {
     private final StorageRepository str;
 
     @Transactional
-    public Long saveStock(Long id, String name, double quantity, int price,
+    public Long saveStock(Long id, String name, String dryingPlace,double quantity, int price,
                           LocalDate stockedDate, double yield, Long storageId) {
         Storage storage = str.findByIdLazy(id);
-        Stock stock = Stock.createStock(id, name, quantity, price, stockedDate, yield, storage);
+        Stock stock = Stock.createStock(id, name, dryingPlace, quantity, price, stockedDate, yield, storage);
         return sr.save(stock);
     }
 
@@ -40,6 +40,7 @@ public class StockServiceImp implements StockService {
     @Transactional
     public void removeStock(Long stockId) {
         Stock findStock = sr.findById(stockId);
+        findStock.removeStorage();
         sr.remove(findStock);
     }
 

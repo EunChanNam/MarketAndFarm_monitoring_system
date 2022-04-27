@@ -18,6 +18,8 @@ public class Stock {
     @Column(name = "item_name")
     private String name;
 
+    private String dryingPlace;
+
     @Column(name = "stock_quantity")
     private double quantity;
 
@@ -46,14 +48,14 @@ public class Stock {
         this.quantity -= quantity;
     }
 
-    public static Stock createStock(Long id, String name, double quantity, int price, LocalDate stockedDate,
+    public static Stock createStock(Long id, String name, String dryingPlace, double quantity, int price, LocalDate stockedDate,
                                     double yield, Storage storage) {
-        Stock stock = new Stock(id, name, quantity, price, stockedDate, yield);
+        Stock stock = new Stock(id, name, dryingPlace, quantity, price, stockedDate, yield);
         stock.addStorage(storage);
         return stock;
     }
 
-    public Stock(Long id, String name, double quantity, int price, LocalDate stockedDate, double yield) {
+    public Stock(Long id, String name, String dryingPlace, double quantity, int price, LocalDate stockedDate, double yield) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
