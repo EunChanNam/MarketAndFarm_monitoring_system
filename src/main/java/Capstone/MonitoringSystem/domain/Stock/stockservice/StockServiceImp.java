@@ -18,7 +18,7 @@ public class StockServiceImp implements StockService {
     private final StockRepository sr;
 
     @Override
-
+    @Transactional
     public Long saveStock(Stock stock) {
         sr.save(stock);
         return stock.getId();
@@ -35,12 +35,14 @@ public class StockServiceImp implements StockService {
     }
 
     @Override
+    @Transactional
     public void removeStock(Long stockId) {
         Stock findStock = sr.findById(stockId);
         sr.remove(findStock);
     }
 
     @Override
+    @Transactional
     public void updateStock(Long stockId, StockUpdateForm form) {
         //StockUpdateForm 정해지면 짜기
     }

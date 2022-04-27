@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -23,7 +24,15 @@ public class StockRepositoryImp implements StockRepository{
 
     @Override
     public List<Stock> findBySearch(StockSearch stockSearch) {
-        return null;
+        LocalDate recentWeek = LocalDate.now().minusDays(7);
+        if (stockSearch.getName() == null && stockSearch.getDate() == null) {
+            String query = "select s from Stock s join fetch s.storage " +
+                    "where s.stockedDate >= :recentWeek";
+            return em.createQuery(query, Stock.class)
+                    .setParameter("recentWeek", recentWeek)
+                    .getResultList();
+        }
+        else return null;
     }
 
     @Override
