@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +35,12 @@ public class StockController {
     }
 
     @PostMapping("/stocks/new")
-    public String stockInput(@ModelAttribute("form") StockInputForm form) {
+    public String stockInput(@Validated @ModelAttribute("form") StockInputForm form,
+                             BindingResult bindingResult) {
         //todo Validation
+        if (bindingResult.hasErrors()) {
+            return "inputListUpload";
+        }
 
         stockService.saveStock(form.getId(), form.getName(), form.getDryingPlace(), form.getQuantity(),
                 form.getPrice(), form.getStockedDate(), form.getYield(), form.getStorageId());

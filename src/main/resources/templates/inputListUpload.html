@@ -20,6 +20,12 @@
     <!-- Template core CSS-->
     <link href="/assets/css/template.css" rel="stylesheet">
     <link href='/css/list.css' rel='stylesheet' type='text/css'>
+    <style>
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
 
@@ -101,25 +107,43 @@
                     <form th:action="@{/stocks/new}" th:object="${form}" method="post">
                         <div class="row form-row">
                             <div class="col-md-12 form-group">
-                                <input th:field="*{id}" class="form-control" type="text" placeholder="B/L넘버">
+                                <input th:field="*{id}" th:errorclass="field-error" class="form-control" type="text" placeholder="B/L넘버">
+                            </div>
+                            <div class="field-error" th:errors="*{id}">
+                                B/L넘버 오류
                             </div>
                             <div class="col-md-12 form-group">
-                                <input th:field="*{name}" class="form-control" type="text" placeholder="품종">
+                                <input th:field="*{name}" th:errorclass="field-error" class="form-control" type="text" placeholder="품목">
+                            </div>
+                            <div class="field-error" th:errors="*{name}">
+                                품목 오류
                             </div>
                             <div class="col-md-12 form-group">
-                                <input th:field="*{quantity}" class="form-control" type="text" placeholder="수량(TON)">
+                                <input th:field="*{quantity}" th:errorclass="field-error" class="form-control" type="text" placeholder="수량(TON)">
+                            </div>
+                            <div class="field-error" th:errors="*{quantity}">
+                                수량 오류
                             </div>
                             <div class="col-md-12 form-group">
                                 <input th:field="*{dryingPlace}" class="form-control" type="text" placeholder="건조장">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input th:field="*{price}" class="form-control" type="text" placeholder="단가">
+                                <input th:field="*{price}" th:errorclass="field-error" class="form-control" type="text" placeholder="단가">
+                            </div>
+                            <div class="field-error" th:errors="*{price}">
+                                단가 오류
                             </div>
                             <div class="col-md-12 form-group">
-                                <input th:field="*{stockedDate}" class="form-control" type="text" placeholder="입고 날짜">
+                                <input th:field="*{stockedDate}" th:errorclass="field-error" class="form-control" type="text" placeholder="입고 날짜">
+                            </div>
+                            <div class="field-error" th:errors="*{stockedDate}">
+                                입고날짜 오류
                             </div>
                             <div class="col-md-12 form-group">
-                                <input th:field="*{storageId}" class="form-control" type="text" placeholder="창고 번호">
+                                <input th:field="*{storageId}" th:errorclass="field-error" class="form-control" type="text" placeholder="창고 번호">
+                            </div>
+                            <div class="field-error" th:errors="*{storageId}">
+                                창고번호 오류
                             </div>
                             <div class="col-md-12 form-group">
                                 <input th:field="*{yield}" class="form-control" type="text" placeholder="수율">
