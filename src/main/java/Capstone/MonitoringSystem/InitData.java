@@ -1,5 +1,7 @@
 package Capstone.MonitoringSystem;
 
+import Capstone.MonitoringSystem.domain.Manager.Manager;
+import Capstone.MonitoringSystem.domain.Manager.managerrepository.ManagerRepository;
 import Capstone.MonitoringSystem.domain.Storage.Storage;
 import Capstone.MonitoringSystem.domain.Storage.storagerepository.StorageRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class InitData {
     static class Init {
 
         private final StorageRepository sr;
+        private final ManagerRepository mr;
 
         @Transactional
         public void initDB() {
@@ -37,6 +40,11 @@ public class InitData {
             sr.save(storage2);
             sr.save(storage3);
 
+            Manager manager = new Manager();
+            manager.setName("manager1");
+            manager.setLoginId("manager1");
+            manager.setPw("hello");
+            mr.save(manager);
         }
     }
 
