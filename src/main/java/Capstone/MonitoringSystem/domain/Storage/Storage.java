@@ -25,4 +25,12 @@ public class Storage {
 
     @OneToMany(mappedBy = "storage")
     private List<Stock> stocks;
+
+    public Double getTotalStockQuantity() {
+        Double total = 0.0;
+        for (Stock stock : stocks) {
+            total += stock.getQuantity();
+        }
+        return total;
+    }
 }
