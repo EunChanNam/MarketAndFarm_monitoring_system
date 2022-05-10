@@ -32,10 +32,13 @@ public class InitData {
         public void initDB() {
             Storage storage1 = new Storage();
             storage1.setName("Storage1");
+            storage1.setMaxCapacity(100.0);
             Storage storage2 = new Storage();
             storage2.setName("Storage2");
+            storage2.setMaxCapacity(100.0);
             Storage storage3 = new Storage();
             storage3.setName("Storage3");
+            storage3.setMaxCapacity(100.0);
             sr.save(storage1);
             sr.save(storage2);
             sr.save(storage3);

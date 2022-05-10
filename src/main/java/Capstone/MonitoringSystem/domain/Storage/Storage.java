@@ -23,6 +23,8 @@ public class Storage {
 
     private Integer humidity;
 
+    private Double maxCapacity;
+
     @OneToMany(mappedBy = "storage")
     private List<Stock> stocks;
 

@@ -34,6 +34,8 @@ public class StorageController {
         }
 
         model.addAttribute("stocks", stocks);
+        model.addAttribute("total", total);
+        model.addAttribute("maxCapacity", storage.getMaxCapacity());
 
         return "wareHouse1";
     }

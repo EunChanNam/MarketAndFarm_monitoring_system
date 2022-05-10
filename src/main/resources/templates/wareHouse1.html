@@ -208,7 +208,7 @@
 
 
     <!-- 차트 -->
-    <script>// chart colors
+    <script th:inline="javascript">// chart colors
     var colors = ['orange','blue'];
     /* 3 donut charts */
     var donutOptions = { cutoutPercentage: 30, //도넛두께 : 값이 클수록 얇아짐
@@ -220,7 +220,7 @@
             { backgroundColor: colors.slice(0,2),
                 borderWidth: 0,
                 //데이터 들어갈 곳 (그냥 숫자 넣으면 비율 맞춰줌 > 합 100 아니어도 됨.)
-                data: [80, 20]
+                data: [[[${total}]], [[${maxCapacity - total}]]]
             }
         ]
     };
