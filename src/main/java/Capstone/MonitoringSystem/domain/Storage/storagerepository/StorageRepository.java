@@ -23,7 +23,7 @@ public class StorageRepository {
     }
 
     public Storage findById(Long id) {
-        String query = "select s from Storage s " +
+        String query = "select distinct s from Storage s " +
                 "join fetch s.stocks " +
                 "where s.id =:id";
         List<Storage> storages = em.createQuery(query, Storage.class)
@@ -35,7 +35,7 @@ public class StorageRepository {
     }
 
     public List<Storage> findAllStorages() {
-        String query = "select distinct s from Storage s join fetch s.stocks";
+        String query = "select s from Storage s";
         return em.createQuery(query, Storage.class)
                 .getResultList();
     }
