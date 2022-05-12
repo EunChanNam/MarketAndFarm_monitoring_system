@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,7 @@ public class Storage {
     private Double maxCapacity;
 
     @OneToMany(mappedBy = "storage")
-    private List<Stock> stocks;
+    private List<Stock> stocks = new ArrayList<>();
 
     public Double getTotalStockQuantity() {
         Double total = 0.0;

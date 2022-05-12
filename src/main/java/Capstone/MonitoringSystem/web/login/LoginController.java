@@ -50,7 +50,6 @@ public class LoginController {
         HttpSession session = request.getSession(true);
         session.setAttribute(LoginConst.LOGIN_MANAGER, loginManager.getId());
 
-        log.info("{}", redirectURI);
         if (StringUtils.hasText(redirectURI)) {
             return "redirect:" + redirectURI;
         }

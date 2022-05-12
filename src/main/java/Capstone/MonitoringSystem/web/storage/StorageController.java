@@ -21,7 +21,7 @@ public class StorageController {
     public String storagePage(@PathVariable Long storageId, Model model) {
         //todo null 처리하기
         Storage storage = sr.findById(storageId);
-        if (storage == null) {
+        if (storage.getStocks().isEmpty()) {
             return "wareHouse1";
         }
 

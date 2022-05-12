@@ -37,7 +37,7 @@
     <div class="container-fluid">
         <!-- Brand-->
 <!--        <%&#45;&#45;좌측상단 로고&#45;&#45;%>-->
-        <div class="inner-header"><a class="inner-brand" href="index.html">Market&Farm</a></div>
+        <div class="inner-header"><a th:href="@{/}" class="inner-brand" href="index.html">Market&Farm</a></div>
         <!-- Navigation-->
         <div class="inner-navigation collapse">
 <!--            <%&#45;&#45;            메뉴 리스트&#45;&#45;%>-->
@@ -102,7 +102,7 @@
                         <div class="team-image"><img src="assets/images/warehouse.png" alt="">
 
                         </div>
-                        <h2 style="text-align: center">warehouse 1</h2>
+                        <h2 style="text-align: center"><a th:href="@{/storage/1}">warehouse 1</a></h2>
                     </div>
                 </div>
 
@@ -112,7 +112,7 @@
                         <div class="team-image"><img src="assets/images/warehouse.png" alt="">
 
                         </div>
-                        <h2 style="text-align: center">warehouse 2</h2>
+                        <h2 style="text-align: center"><a th:href="@{/storage/2}">warehouse 2</a></h2>
                     </div>
                 </div>
 
@@ -122,7 +122,7 @@
                         <div class="team-image"><img src="assets/images/warehouse.png" alt="">
 
                         </div>
-                        <h2 style="text-align: center">warehouse 3</h2>
+                        <h2 style="text-align: center"><a th:href="@{/storage/3}">warehouse 3</a></h2>
                     </div>
                 </div>
             </div>
