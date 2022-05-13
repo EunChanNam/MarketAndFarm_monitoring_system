@@ -23,6 +23,16 @@ public class Storage {
 
     private Integer humidity;
 
+    private Double maxCapacity;
+
     @OneToMany(mappedBy = "storage")
     private List<Stock> stocks;
+
+    public Double getTotalStockQuantity() {
+        Double total = 0.0;
+        for (Stock stock : stocks) {
+            total += stock.getQuantity();
+        }
+        return total;
+    }
 }

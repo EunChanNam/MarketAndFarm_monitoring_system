@@ -29,6 +29,8 @@ public class Stock {
 
     private Double yield;
 
+    private Integer rate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storage_id")
     private Storage storage;

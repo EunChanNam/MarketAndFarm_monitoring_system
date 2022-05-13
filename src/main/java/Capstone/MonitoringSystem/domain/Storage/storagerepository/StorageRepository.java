@@ -22,8 +22,20 @@ public class StorageRepository {
         return em.find(Storage.class, id);
     }
 
+    public Storage findById(Long id) {
+        String query = "select distinct s from Storage s " +
+                "join fetch s.stocks " +
+                "where s.id =:id";
+        List<Storage> storages = em.createQuery(query, Storage.class)
+                .setParameter("id", id)
+                .getResultList();
+
+        if (storages.isEmpty()) return null;
+        else return storages.get(0);
+    }
+
     public List<Storage> findAllStorages() {
-        String query = "select distinct s from Storage s join fetch s.stocks";
+        String query = "select s from Storage s";
         return em.createQuery(query, Storage.class)
                 .getResultList();
     }
