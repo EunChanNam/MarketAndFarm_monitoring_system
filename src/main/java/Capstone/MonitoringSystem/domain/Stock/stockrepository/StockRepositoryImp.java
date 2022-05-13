@@ -24,15 +24,44 @@ public class StockRepositoryImp implements StockRepository{
 
     @Override
     public List<Stock> findBySearch(StockSearch stockSearch) {
-        LocalDate recentWeek = LocalDate.now().minusDays(7);
         if (stockSearch.getName() == null && stockSearch.getDate() == null) {
+            LocalDate minusDays = LocalDate.now().minusDays(7);
             String query = "select s from Stock s join fetch s.storage " +
-                    "where s.stockedDate >= :recentWeek";
+                    "where s.stockedDate >= :minusDays";
             return em.createQuery(query, Stock.class)
-                    .setParameter("recentWeek", recentWeek)
+                    .setParameter("minusDays", minusDays)
                     .getResultList();
         }
-        else return null;
+        if (stockSearch.getName() == null) {
+            LocalDate minusDays = LocalDate.now().minusDays(stockSearch.getDate());
+            String query = "select s from Stock s join fetch s.storage " +
+                    "where s.stockedDate >= :minusDays";
+            return em.createQuery(query, Stock.class)
+                    .setParameter("minusDays", minusDays)
+                    .getResultList();
+        }
+        if (stockSearch.getDate() == null) {
+            LocalDate minusDays = LocalDate.now().minusDays(7);
+            String target = stockSearch.getName();
+            String query = "select s from Stock s join fetch s.storage " +
+                    "where s.stockedDate >= :minusDays " +
+                    "and s.name = :target";
+            return em.createQuery(query, Stock.class)
+                    .setParameter("minusDays", minusDays)
+                    .setParameter("target", target)
+                    .getResultList();
+        }
+        else {
+            LocalDate minusDays = LocalDate.now().minusDays(stockSearch.getDate());
+            String target = stockSearch.getName();
+            String query = "select s from Stock s join fetch s.storage " +
+                    "where s.stockedDate >= :minusDays " +
+                    "and s.name = :target";
+            return em.createQuery(query, Stock.class)
+                    .setParameter("minusDays", minusDays)
+                    .setParameter("target", target)
+                    .getResultList();
+        }
     }
 
     @Override
