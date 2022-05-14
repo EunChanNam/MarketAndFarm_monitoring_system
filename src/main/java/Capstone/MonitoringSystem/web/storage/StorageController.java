@@ -6,6 +6,7 @@ import Capstone.MonitoringSystem.domain.Storage.storagerepository.StorageReposit
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,11 +22,14 @@ public class StorageController {
     public String storagePage(@PathVariable Long storageId, Model model) {
         //todo null 처리하기
         Storage storage = sr.findById(storageId);
-        if (storage.getStocks().isEmpty()) {
+        List<Stock> stocks = storage.getStocks();
+
+        if (stocks.isEmpty()) {
+            model.addAttribute("stocks", stocks);
+            model.addAttribute("total", 0);
+            model.addAttribute("maxCapacity", storage.getMaxCapacity());
             return "wareHouse1";
         }
-
-        List<Stock> stocks = storage.getStocks();
 
         Double total = storage.getTotalStockQuantity();
         for (Stock stock : stocks) {

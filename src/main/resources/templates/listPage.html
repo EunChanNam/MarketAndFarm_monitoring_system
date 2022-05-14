@@ -84,6 +84,21 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 order-lg-3">
+          <form th:action method="get" th:object="${search}">
+            <div>
+              <div class="form-group">
+                <select th:field="*{date}" name="dateOption" id="date" style="float: left; height: 55px">
+                  <option value="">날짜 기간을 입력하세요</option>
+                  <option value="7">최근 7일</option>
+                  <option value="14">최근 14일</option>
+                  <option value="21">최근 21일</option>
+                  <option value="28">최근 28일</option>
+                </select>
+                <input th:field="*{name}" class="form-control col-lg-9" type="text" style="float: left" name="keyword" placeholder="검색어를 입력하시오.">
+                <button type="submit" id="searchBtn" class="btn btn-circle btn-brand col-lg-auto" style="float: left">검색</button>
+              </div>
+            </div>
+          </form>
           <div class="listTable">
             <table class="mobileTable phone breakpoint" id="table"
                    data-toggle="table"

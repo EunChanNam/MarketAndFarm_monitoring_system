@@ -23,7 +23,7 @@ public class StockController {
     private final StockService stockService;
 
     @GetMapping("/stocks")
-    public String stockList(@ModelAttribute StockSearch stockSearch, Model model) {
+    public String stockList(@ModelAttribute("search") StockSearch stockSearch, Model model) {
         List<Stock> stocks = stockService.findStocksBySearch(stockSearch);
         model.addAttribute("stocks", stocks);
         return "listPage";
