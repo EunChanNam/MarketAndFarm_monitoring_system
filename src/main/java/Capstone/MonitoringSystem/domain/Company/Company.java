@@ -16,4 +16,11 @@ public class Company {
 
     @Column(name = "company_name")
     private String name;
+
+    protected Company() {
+    }
+
+    public Company(String name) {
+        this.name = name;
+    }
 }
