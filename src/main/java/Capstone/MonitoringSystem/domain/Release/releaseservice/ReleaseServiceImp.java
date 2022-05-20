@@ -15,13 +15,10 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class ReleaseServiceImp implements ReleaseService{
 
-    private final StockService stockService;
     private final ReleaseRepository releaseRepository;
 
     @Transactional
-    public void saveRelease(Integer price, Double quantity, LocalDate releasedDate, Long stockId, Company company) {
-
-        Stock stock = stockService.findStock(stockId);
+    public void saveRelease(Integer price, Double quantity, LocalDate releasedDate, Stock stock, Company company) {
 
         Release release = Release.createRelease(price, quantity, releasedDate, stock, company);
         releaseRepository.save(release);

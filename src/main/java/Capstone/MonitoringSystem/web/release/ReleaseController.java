@@ -33,10 +33,19 @@ public class ReleaseController {
 
     @PostMapping("releases/new")
     public String newRelease(@RequestParam Long stockId,
-                             @Validated @ModelAttribute ReleaseInputForm form,
-                             BindingResult bindingResult) {
+                             @Validated @ModelAttribute("releaseForm") ReleaseInputForm form,
+                             BindingResult bindingResult,
+                             Model model) {
+
+        Stock stock = stockService.findStock(stockId);
+        model.addAttribute("stock", stock); //@ModelAttribute로 주고 받고 service로직에서 stock찾는 쿼리를 날리는게 베스트
 
         if (bindingResult.hasErrors()) {
+            return "releaseInputUpload";
+        }
+
+        if (stock.getQuantity() < form.getQuantity()) {
+            bindingResult.rejectValue("quantity", "NotEnoughQuantity", "수량이 부족합니다.");
             return "releaseInputUpload";
         }
 
@@ -44,9 +53,9 @@ public class ReleaseController {
         if (company == null) {
             Company newCompany = new Company(form.getCompanyName());
             cr.save(newCompany);
-            rs.saveRelease(form.getPrice(), form.getQuantity(), form.getReleasedDate(), stockId, newCompany);
+            rs.saveRelease(form.getPrice(), form.getQuantity(), form.getReleasedDate(), stock, newCompany);
         } else {
-            rs.saveRelease(form.getPrice(), form.getQuantity(), form.getReleasedDate(), stockId, company);
+            rs.saveRelease(form.getPrice(), form.getQuantity(), form.getReleasedDate(), stock, company);
         }
 
         return "redirect:/"; //todo 출고 리스트페이지 완성되면 수정
