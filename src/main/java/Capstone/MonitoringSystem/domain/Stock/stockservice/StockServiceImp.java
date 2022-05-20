@@ -50,4 +50,9 @@ public class StockServiceImp implements StockService {
     public void updateStock(Long stockId, StockUpdateForm form) {
         //StockUpdateForm 정해지면 짜기
     }
+
+    @Override
+    public List<Stock> findAll() {
+        return sr.findAll();
+    }
 }

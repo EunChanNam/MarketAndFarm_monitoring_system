@@ -16,4 +16,6 @@ public interface StockRepository {
     public Stock findById(Long id);
 
     public void remove(Stock stock);
+
+    List<Stock> findAll();
 }

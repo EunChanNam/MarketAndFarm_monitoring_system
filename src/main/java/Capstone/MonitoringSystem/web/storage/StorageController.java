@@ -21,7 +21,7 @@ public class StorageController {
 
     @GetMapping("/storage/{storageId}")
     public String storagePage(@PathVariable Long storageId, Model model) {
-        //todo null 처리하기
+
         Storage storage = sr.findById(storageId);
         List<Stock> stocks = storage.getStocks();
 

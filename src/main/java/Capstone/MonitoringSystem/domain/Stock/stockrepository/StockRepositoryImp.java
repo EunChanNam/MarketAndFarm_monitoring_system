@@ -85,4 +85,11 @@ public class StockRepositoryImp implements StockRepository{
     public void remove(Stock stock) {
         em.remove(stock);
     }
+
+    @Override
+    public List<Stock> findAll() {
+        String query = "select s from Stock s";
+        return em.createQuery(query, Stock.class)
+                .getResultList();
+    }
 }

@@ -2,6 +2,7 @@ package Capstone.MonitoringSystem.web.Stock;
 
 import Capstone.MonitoringSystem.domain.Stock.Stock;
 import Capstone.MonitoringSystem.domain.Stock.StockSearch;
+import Capstone.MonitoringSystem.domain.Stock.stockrepository.StockRepository;
 import Capstone.MonitoringSystem.domain.Stock.stockservice.StockService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,12 @@ public class StockController {
     @PostMapping("/stocks/new")
     public String stockInput(@Validated @ModelAttribute("form") StockInputForm form,
                              BindingResult bindingResult) {
-        //todo Validation
+
+        if (idDuplicatedCheck(form.getId())) {
+            bindingResult.rejectValue("id", "DuplicatedId");
+            return "inputListUpload";
+        }
+
         if (bindingResult.hasErrors()) {
             return "inputListUpload";
         }
@@ -46,5 +52,16 @@ public class StockController {
                 form.getPrice(), form.getStockedDate(), form.getYield(), form.getStorageId());
 
         return "redirect:/stocks";
+    }
+
+    private boolean idDuplicatedCheck(Long id) {
+        List<Stock> all = stockService.findAll();
+
+        for (Stock stock : all) {
+            if (stock.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
