@@ -27,12 +27,8 @@ public class StockRepositoryImp implements StockRepository{
     @Override
     public List<Stock> findBySearch(StockSearch stockSearch) {
         if (stockSearch.getName() == null && stockSearch.getDate() == null) {
-            LocalDate minusDays = LocalDate.now().minusDays(7);
-            log.info("Date = {}", minusDays);
-            String query = "select s from Stock s join fetch s.storage " +
-                    "where s.stockedDate >= :minusDays";
+            String query = "select s from Stock s join fetch s.storage";
             return em.createQuery(query, Stock.class)
-                    .setParameter("minusDays", minusDays)
                     .getResultList();
         }
         if (stockSearch.getName().isEmpty()) {
