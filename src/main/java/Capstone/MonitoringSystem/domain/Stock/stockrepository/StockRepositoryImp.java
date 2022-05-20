@@ -26,7 +26,8 @@ public class StockRepositoryImp implements StockRepository{
 
     @Override
     public List<Stock> findBySearch(StockSearch stockSearch) {
-        if (stockSearch.getName() == null && stockSearch.getDate() == null) {
+        if ((stockSearch.getName() == null && stockSearch.getDate() == null) ||
+            stockSearch.getName().isEmpty() && stockSearch.getDate() == null) {
             String query = "select s from Stock s join fetch s.storage";
             return em.createQuery(query, Stock.class)
                     .getResultList();
