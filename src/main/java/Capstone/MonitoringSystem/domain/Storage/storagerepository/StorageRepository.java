@@ -24,7 +24,7 @@ public class StorageRepository {
 
     public Storage findById(Long id) {
         String query = "select distinct s from Storage s " +
-                "join fetch s.stocks " +
+                "left join fetch s.stocks " +
                 "where s.id =:id";
         List<Storage> storages = em.createQuery(query, Storage.class)
                 .setParameter("id", id)

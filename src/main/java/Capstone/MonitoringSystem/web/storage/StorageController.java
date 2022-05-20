@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,8 +25,8 @@ public class StorageController {
         Storage storage = sr.findById(storageId);
         List<Stock> stocks = storage.getStocks();
 
-        if (stocks.isEmpty()) {
-            model.addAttribute("stocks", stocks);
+        if (stocks == null) {
+            model.addAttribute("stocks", new ArrayList<>());
             model.addAttribute("total", 0);
             model.addAttribute("maxCapacity", storage.getMaxCapacity());
             return "wareHouse1";
