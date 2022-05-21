@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="UTF-8">
@@ -96,59 +96,51 @@
                         <h5 class="m-b-30">출고LIST 입력</h5>
                     </div>
 
-                        <div class="row form-row">
-                            <div class="col-md-12 form-group">
-                                <input th:text="${stock.id}" th:errorclass="field-error" class="form-control" type="text" placeholder="B/L넘버" readonly>
-                            </div>
-                            <div class="field-error" th:errors="*{id}">
-                                B/L넘버 오류
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <input th:text="${stock.name}" th:errorclass="field-error" class="form-control" type="text" placeholder="품목" readonly>
-                            </div>
-                            <div class="field-error" th:errors="*{name}">
-                                품목 오류
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <input th:text="${stock.quantity}" th:errorclass="field-error" class="form-control" type="text" placeholder="수량(TON)" readonly>
-                            </div>
-                            <div class="field-error" th:errors="*{quantity}">
-                                수량 오류
-                            </div>
-
-                            <div class="col-md-12 form-group">
-                                <input th:text="${stock.price}" th:errorclass="field-error" class="form-control" type="text" placeholder="단가" readonly>
-                            </div>
-                            <div class="field-error" th:errors="*{price}">
-                                단가 오류
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <input th:text="${stock.stockedDate}" th:errorclass="field-error" class="form-control" type="text" placeholder="입고 날짜" readonly>
-                            </div>
-                            <div class="field-error" th:errors="*{stockedDate}">
-                                입고날짜 오류
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <input th:text="${stock.storage.id}" th:errorclass="field-error" class="form-control" type="text" placeholder="창고 번호" readonly>
-                            </div>
-                            <div class="field-error" th:errors="*{storageId}">
-                                창고번호 오류
-                            </div>
+                    <div class="row form-row">
+                        <h6 class="m-t-10">&nbsp&nbsp입고 B/L넘버</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.id}" th:name="stockId" th:value="${stock.id}" class="form-control" type="text" readonly></div>
                         </div>
-                    <form th:action="@{/stocks/new}" th:object="${form}" method="post">
+                        <h6 class="m-t-10">&nbsp&nbsp품목</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.name}" class="form-control" type="text"  readonly></div>
+                        </div>
+                        <h6 class="m-t-10">&nbsp&nbsp잔여 수량(TON)</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.quantity}" class="form-control" type="text"  readonly></div>
+                        </div>
+                        <h6 class="m-t-10">&nbsp&nbsp입고 단가</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.price}" class="form-control" type="text" readonly></div>
+                        </div>
+                        <h6 class="m-t-10">&nbsp&nbsp입고 날짜</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.stockedDate}" class="form-control" type="text" readonly></div>
+                        </div>
+                        <h6 class="m-t-10">&nbsp&nbsp창고 번호</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.storage.id}" class="form-control" type="text" readonly></div>
+                        </div>
+                    </div>
+                    <form th:action="@{/releases/new}" th:object="${releaseForm}" method="post">
+                        <input th:name="stockId" th:value="${stock.id}" class="form-control" type="hidden">
                         <div class="row form-row">
                             <div class="col-md-12 form-group">
-                                <input th:text="${stock.yield}" class="form-control" type="text" placeholder="출고 날짜">
+                                <input th:field="*{releasedDate}" class="form-control" type="text" placeholder="출고 날짜">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input th:text="${stock.yield}" class="form-control" type="text" placeholder="출고량">
+                                <input th:field="*{price}" class="form-control" type="text" placeholder="출고 단가">
                             </div>
                             <div class="col-md-12 form-group">
-                                <input th:text="${stock.}" class="form-control" type="text" placeholder="회사명">
+                                <input th:field="*{quantity}" th:errorclass="field-error" class="form-control" type="text" placeholder="출고량">
+                            </div>
+                            <div th:class="field-error" th:errors="*{quantity}">수량 오류</div>
+                            <div class="col-md-12 form-group">
+                                <input th:field="*{companyName}" class="form-control" type="text" placeholder="회사명">
                             </div>
                         </div>
                         <div class="text-right">
-                            <input type="submit" class="btn btn-brand"></input>
+                            <input type="submit" class="btn btn-brand">
                         </div>
 
                     </form>
