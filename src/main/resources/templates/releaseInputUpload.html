@@ -97,21 +97,27 @@
                     </div>
 
                     <div class="row form-row">
+                        <h6 class="m-t-10">&nbsp;&nbsp;입고 B/L넘버</h6>
                         <div class="col-md-12 form-group">
                             <div th:text="${stock.id}" th:name="stockId" th:value="${stock.id}" class="form-control" type="text" readonly></div>
                         </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;품목</h6>
                         <div class="col-md-12 form-group">
                             <div th:text="${stock.name}" class="form-control" type="text"  readonly></div>
                         </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;잔여 수량(TON)</h6>
                         <div class="col-md-12 form-group">
                             <div th:text="${stock.quantity}" class="form-control" type="text"  readonly></div>
                         </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;입고 단가</h6>
                         <div class="col-md-12 form-group">
                             <div th:text="${stock.price}" class="form-control" type="text" readonly></div>
                         </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;입고 날짜</h6>
                         <div class="col-md-12 form-group">
                             <div th:text="${stock.stockedDate}" class="form-control" type="text" readonly></div>
                         </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;창고 번호</h6>
                         <div class="col-md-12 form-group">
                             <div th:text="${stock.storage.id}" class="form-control" type="text" readonly></div>
                         </div>
@@ -120,11 +126,9 @@
                         <input th:name="stockId" th:value="${stock.id}" class="form-control" type="hidden">
                         <div class="row form-row">
                             <div class="col-md-12 form-group">
-                                <input th:field="*{releasedDate}" class="form-control" type="text" placeholder="출고 날짜">
-                            </div>
-                            <div class="col-md-12 form-group">
                                 <input th:field="*{price}" class="form-control" type="text" placeholder="출고 단가">
                             </div>
+                            <div th:class="field-error" th:errors="*{price}">가격 오류</div>
                             <div class="col-md-12 form-group">
                                 <input th:field="*{quantity}" th:errorclass="field-error" class="form-control" type="text" placeholder="출고량">
                             </div>
@@ -132,6 +136,11 @@
                             <div class="col-md-12 form-group">
                                 <input th:field="*{companyName}" class="form-control" type="text" placeholder="회사명">
                             </div>
+                            <div th:class="field-error" th:errors="*{companyName}">회사명 오류</div>
+                            <div class="col-md-12 form-group">
+                                출고 날짜: <input type="date" name="startday" th:field="*{releasedDate}">
+                            </div>
+                            <div th:class="field-error" th:errors="*{releasedDate}">날짜 오류</div>
                         </div>
                         <div class="text-right">
                             <input type="submit" class="btn btn-brand">
