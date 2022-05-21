@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="UTF-8">
@@ -84,13 +84,6 @@
                         <!--p This theme will shake your world.-->
                     </div>
                 </div>
-<!--                <%&#45;&#45;                <div class="col-md-6">&#45;&#45;%>-->
-<!--                <%&#45;&#45;                    <ol class="breadcrumb">&#45;&#45;%>-->
-<!--                    <%&#45;&#45;                        <li class="breadcrumb-item"><a href="#">Home</a></li>&#45;&#45;%>-->
-<!--                    <%&#45;&#45;                        <li class="breadcrumb-item"><a href="#">Shop</a></li>&#45;&#45;%>-->
-<!--                    <%&#45;&#45;                        <li class="breadcrumb-item active">Checkout</li>&#45;&#45;%>-->
-<!--                    <%&#45;&#45;                    </ol>&#45;&#45;%>-->
-<!--                <%&#45;&#45;                </div>&#45;&#45;%>-->
             </div>
         </div>
     </section>
@@ -133,31 +126,34 @@
                             <div class="field-error" th:errors="*{price}">
                                 단가 오류
                             </div>
+<!--                            <div class="col-md-12 form-group">-->
+<!--                                <input th:field="*{stockedDate}" th:errorclass="field-error" class="form-control" type="text" placeholder="입고 날짜">-->
+<!--                            </div>-->
+<!--                            <div class="col-md-12 form-group">-->
+<!--                                <input th:field="*{storageId}" th:errorclass="field-error" class="form-control" type="text" placeholder="창고 번호">-->
+<!--                            </div>-->
                             <div class="col-md-12 form-group">
-                                <input th:field="*{stockedDate}" th:errorclass="field-error" class="form-control" type="text" placeholder="입고 날짜">
+                                <input th:field="*{yield}" class="form-control" type="text" placeholder="수율">
                             </div>
-                            <div class="field-error" th:errors="*{stockedDate}">
-                                입고날짜 오류
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <input th:field="*{storageId}" th:errorclass="field-error" class="form-control" type="text" placeholder="창고 번호">
+                            <div th:each="storage : ${storages}">
+                                <div class="form-check" >
+                                    <label th:for="${#ids.next('storageId')}" th:text="${storage.id} + '번 창고'" class="form-check-label">
+                                        1번 창고
+                                    </label>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    <input th:field="*{storageId}" th:value="${storage.id}" class="form-check-input" type="radio" name="flexRadioDefault">
+                                </div>
                             </div>
                             <div class="field-error" th:errors="*{storageId}">
                                 창고번호 오류
                             </div>
-                            <div class="col-md-12 form-group">
-                                <input th:field="*{yield}" class="form-control" type="text" placeholder="수율">
+                            <div class="col-md-2 m-auto row align-items-center">
+                                입고 날짜: <input type="date" name="startday" th:field="*{stockedDate}">
+                            </div>
+                            <div class="field-error" th:errors="*{stockedDate}">
+                                입고날짜 오류
                             </div>
                         </div>
-<!--                        <%&#45;&#45;                        출고량 출고일 주석처리&#45;&#45;%>-->
-<!--                        <%&#45;&#45;                        <div class="row form-row">&#45;&#45;%>-->
-<!--                        <%&#45;&#45;                            <div class="col-md-6 form-group">&#45;&#45;%>-->
-<!--                            <%&#45;&#45;                                <input class="form-control" type="text" placeholder="출고량">&#45;&#45;%>-->
-<!--                            <%&#45;&#45;                            </div>&#45;&#45;%>-->
-<!--                        <%&#45;&#45;                            <div class="col-md-6 form-group">&#45;&#45;%>-->
-<!--                            <%&#45;&#45;                                <input class="form-control" type="text" placeholder="출고일">&#45;&#45;%>-->
-<!--                            <%&#45;&#45;                            </div>&#45;&#45;%>-->
-<!--                        <%&#45;&#45;                        </div>&#45;&#45;%>-->
                         <button type="submit" class="text-right">Add List</button>
                     </form>
                 </div>

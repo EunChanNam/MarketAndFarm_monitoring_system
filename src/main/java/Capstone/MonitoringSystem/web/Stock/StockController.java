@@ -4,6 +4,8 @@ import Capstone.MonitoringSystem.domain.Stock.Stock;
 import Capstone.MonitoringSystem.domain.Stock.StockSearch;
 import Capstone.MonitoringSystem.domain.Stock.stockrepository.StockRepository;
 import Capstone.MonitoringSystem.domain.Stock.stockservice.StockService;
+import Capstone.MonitoringSystem.domain.Storage.Storage;
+import Capstone.MonitoringSystem.domain.Storage.storagerepository.StorageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,12 @@ import java.util.List;
 public class StockController {
 
     private final StockService stockService;
+    private final StorageRepository sr;
+
+    @ModelAttribute("storages")
+    public List<Storage> storages() {
+        return sr.findAllStorages();
+    }
 
     @GetMapping("/stocks")
     public String stockList(@ModelAttribute("search") StockSearch stockSearch, Model model) {
