@@ -130,7 +130,7 @@
                 <th th:text="${stock.storage.id}" data-field="warehouse" data-sortable="true">창고 번호</th>
                 <th th:text="${stock.yield}" data-field="throughput" data-sortable="true">수율</th>
                 <th data-sortable="true"><a th:href="'javascript:releaseInput('+${stock.id}+')'"><button class="btn btn-success" style="padding : 2px 13px; font-size: 13px;">출고입력</button></a></th>
-                <th data-sortable="true"><button class="btn btn-primary" style="padding : 2px 13px; font-size: 13px;">수정</button></th>
+                <th data-sortable="true"><a th:href="'javascript:editStock('+${stock.id}+')'"><button class="btn btn-primary" style="padding : 2px 13px; font-size: 13px;">수정</button></a></th>
                 <th data-sortable="true"><button class="btn btn-danger" style="padding : 2px 13px; font-size : 13px;">삭제</button></th>
 
               </tr>
@@ -235,6 +235,13 @@
     var form = document.createElement("form");
     form.setAttribute("method", "get");
     form.setAttribute("action", "/releases/new/" + id);
+    document.body.appendChild(form);
+    form.submit();
+  }
+  function editStock(id) {
+    var form = document.createElement("form");
+    form.setAttribute("method", "get");
+    form.setAttribute("action", "/stocks/update/" + id);
     document.body.appendChild(form);
     form.submit();
   }

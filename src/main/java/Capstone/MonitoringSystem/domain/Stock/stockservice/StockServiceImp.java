@@ -47,8 +47,19 @@ public class StockServiceImp implements StockService {
     }
 
     @Transactional
-    public void updateStock(Long stockId, StockUpdateForm form) {
-        //StockUpdateForm 정해지면 짜기
+    public void updateStock(StockUpdateForm updateForm) {
+        Stock stock = sr.findById(updateForm.getId());
+        log.info("stockId = {}", updateForm.getId());
+        Storage storage = str.findById(updateForm.getStorageId());
+
+        stock.removeStorage();
+        stock.addStorage(storage);
+        stock.setName(updateForm.getName());
+        stock.setPrice(updateForm.getPrice());
+        stock.setDryingPlace(updateForm.getDryingPlace());
+        stock.setQuantity(updateForm.getQuantity());
+        stock.setStockedDate(updateForm.getStockedDate());
+        stock.setYield(updateForm.getYield());
     }
 
     @Override

@@ -18,7 +18,7 @@ public interface StockService {
 
     public void removeStock(Long stockId);
 
-    public void updateStock(Long stockId, StockUpdateForm form);
-
     List<Stock> findAll();
+
+    void updateStock(StockUpdateForm updateForm);
 }
