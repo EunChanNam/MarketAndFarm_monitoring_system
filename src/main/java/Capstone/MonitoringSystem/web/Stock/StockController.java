@@ -28,22 +28,30 @@ public class StockController {
     private final StockService stockService;
     private final StorageRepository sr;
 
+    @PostMapping("/stocks/new")
+    public String stockInput(@Validated @ModelAttribute("form") StockInputForm form,
+                             BindingResult bindingResult) {
+
+        if (idDuplicatedCheck(form.getId())) {
+            bindingResult.rejectValue("id", "DuplicatedId");
+            return "inputListUpload";
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "inputListUpload";
+        }
+
+        stockService.saveStock(form.getId(), form.getName(), form.getDryingPlace(), form.getQuantity(),
+                form.getPrice(), form.getStockedDate(), form.getYield(), form.getStorageId());
+
+        return "redirect:/stocks";
+    }
+
     @GetMapping("/stocks")
     public String stockList(@ModelAttribute("search") StockSearch stockSearch, Model model) {
         List<Stock> stocks = stockService.findStocksBySearch(stockSearch);
         model.addAttribute("stocks", stocks);
         return "listPage";
-    }
-
-    @GetMapping("/stocks/update/{stockId}")
-    public String stockUpdateForm(@PathVariable Long stockId, Model model) {
-
-        Stock stock = stockService.findStock(stockId);
-        StockUpdateForm stockUpdateForm = new StockUpdateForm(stockId, stock.getName(), stock.getDryingPlace(), stock.getQuantity(), stock.getPrice(),
-                stock.getStockedDate(), stock.getYield(), stock.getStorage().getId());
-        model.addAttribute("stock", stockUpdateForm);
-
-        return "stockModifyPage";
     }
 
     @PostMapping("/stocks/update")
@@ -57,5 +65,16 @@ public class StockController {
         stockService.updateStock(form);
 
         return "redirect:/stocks";
+    }
+
+    private boolean idDuplicatedCheck(Long id) {
+        List<Stock> all = stockService.findAll();
+
+        for (Stock stock : all) {
+            if (stock.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
