@@ -79,6 +79,19 @@ public class StockRepositoryImp implements StockRepository{
     }
 
     @Override
+    public Stock findForUpdate(Long id) {
+        String query = "select s from Stock s " +
+                "join fetch s.storage str " +
+                "join fetch str.stocks " +
+                "where s.id = :id";
+        List<Stock> result = em.createQuery(query, Stock.class)
+                .setParameter("id", id)
+                .getResultList();
+        if (result.isEmpty()) return null;
+        else return result.get(0);
+    }
+
+    @Override
     public void remove(Stock stock) {
         em.remove(stock);
     }

@@ -48,7 +48,7 @@ public class StockServiceImp implements StockService {
 
     @Transactional
     public void updateStock(StockUpdateForm updateForm) {
-        Stock stock = sr.findById(updateForm.getId());
+        Stock stock = sr.findForUpdate(updateForm.getId());
         log.info("stockId = {}", updateForm.getId());
         Storage storage = str.findById(updateForm.getStorageId());
 
