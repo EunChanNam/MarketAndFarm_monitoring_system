@@ -1,9 +1,7 @@
 package Capstone.MonitoringSystem.domain.Stock.stockrepository;
 
-import Capstone.MonitoringSystem.domain.Release.Release;
-import Capstone.MonitoringSystem.domain.Release.ReleaseSearch;
 import Capstone.MonitoringSystem.domain.Stock.Stock;
-import Capstone.MonitoringSystem.domain.Stock.StockSearch;
+import Capstone.MonitoringSystem.domain.Search;
 
 import java.util.List;
 
@@ -11,7 +9,7 @@ public interface StockRepository {
 
     public Long save(Stock stock);
 
-    public List<Stock> findBySearch(StockSearch stockSearch);
+    public List<Stock> findBySearch(Search search);
 
     public Stock findById(Long id);
 

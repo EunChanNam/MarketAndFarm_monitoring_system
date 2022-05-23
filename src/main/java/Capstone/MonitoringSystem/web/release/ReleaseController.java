@@ -2,7 +2,9 @@ package Capstone.MonitoringSystem.web.release;
 
 import Capstone.MonitoringSystem.domain.Company.Company;
 import Capstone.MonitoringSystem.domain.Company.CompanyRepository;
+import Capstone.MonitoringSystem.domain.Release.Release;
 import Capstone.MonitoringSystem.domain.Release.releaseservice.ReleaseService;
+import Capstone.MonitoringSystem.domain.Search;
 import Capstone.MonitoringSystem.domain.Stock.Stock;
 import Capstone.MonitoringSystem.domain.Stock.stockservice.StockService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -59,5 +63,24 @@ public class ReleaseController {
         }
 
         return "redirect:/"; //todo 출고 리스트페이지 완성되면 수정
+    }
+
+    @GetMapping("/releases")
+    public String releaseListPage(@ModelAttribute("search") Search search,
+                                  Model model) {
+
+        List<Release> releases = rs.findReleaseBySearch(search);
+
+        model.addAttribute("releases", releases);
+
+        return "releaseListPage";
+    }
+
+    @PostMapping("/releases/remove/{releaseId}")
+    public String removeRelease(@PathVariable Long releaseId) {
+
+        rs.removeRelease(releaseId);
+
+        return "redirect:/releases";
     }
 }

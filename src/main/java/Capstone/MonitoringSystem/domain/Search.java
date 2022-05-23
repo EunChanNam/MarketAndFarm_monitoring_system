@@ -1,12 +1,10 @@
-package Capstone.MonitoringSystem.domain.Release;
+package Capstone.MonitoringSystem.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data @AllArgsConstructor
-public class ReleaseSearch {
+public class Search {
 
     private String name;
 

@@ -1,17 +1,17 @@
 package Capstone.MonitoringSystem.domain.Release.releaserepository;
 
 import Capstone.MonitoringSystem.domain.Release.Release;
-import Capstone.MonitoringSystem.domain.Release.ReleaseSearch;
+import Capstone.MonitoringSystem.domain.Search;
 
 import java.util.List;
 
 public interface ReleaseRepository {
 
-    public Long save(Release release);
+    Long save(Release release);
 
-    public List<Release> findBySearch(ReleaseSearch releaseSearch);
+    List<Release> findBySearch(Search search);
 
-    public Release findById(Long id);
+    Release findById(Long id);
 
-    public void remove(Release release);
+    void remove(Release release);
 }

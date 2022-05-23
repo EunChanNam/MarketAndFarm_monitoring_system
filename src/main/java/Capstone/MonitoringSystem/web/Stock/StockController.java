@@ -1,11 +1,9 @@
 package Capstone.MonitoringSystem.web.Stock;
 
 import Capstone.MonitoringSystem.domain.Stock.Stock;
-import Capstone.MonitoringSystem.domain.Stock.StockSearch;
+import Capstone.MonitoringSystem.domain.Search;
 import Capstone.MonitoringSystem.domain.Stock.StockUpdateForm;
-import Capstone.MonitoringSystem.domain.Stock.stockrepository.StockRepository;
 import Capstone.MonitoringSystem.domain.Stock.stockservice.StockService;
-import Capstone.MonitoringSystem.domain.Storage.Storage;
 import Capstone.MonitoringSystem.domain.Storage.storagerepository.StorageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -48,8 +45,8 @@ public class StockController {
     }
 
     @GetMapping("/stocks")
-    public String stockList(@ModelAttribute("search") StockSearch stockSearch, Model model) {
-        List<Stock> stocks = stockService.findStocksBySearch(stockSearch);
+    public String stockList(@ModelAttribute("search") Search search, Model model) {
+        List<Stock> stocks = stockService.findStocksBySearch(search);
         model.addAttribute("stocks", stocks);
         return "listPage";
     }

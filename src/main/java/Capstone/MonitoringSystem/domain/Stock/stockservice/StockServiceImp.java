@@ -1,7 +1,7 @@
 package Capstone.MonitoringSystem.domain.Stock.stockservice;
 
 import Capstone.MonitoringSystem.domain.Stock.Stock;
-import Capstone.MonitoringSystem.domain.Stock.StockSearch;
+import Capstone.MonitoringSystem.domain.Search;
 import Capstone.MonitoringSystem.domain.Stock.StockUpdateForm;
 import Capstone.MonitoringSystem.domain.Stock.stockrepository.StockRepository;
 import Capstone.MonitoringSystem.domain.Storage.Storage;
@@ -31,8 +31,8 @@ public class StockServiceImp implements StockService {
         sr.save(stock);
     }
 
-    public List<Stock> findStocksBySearch(StockSearch stockSearch) {
-        return sr.findBySearch(stockSearch);
+    public List<Stock> findStocksBySearch(Search search) {
+        return sr.findBySearch(search);
     }
 
     public Stock findStock(Long stockId) {

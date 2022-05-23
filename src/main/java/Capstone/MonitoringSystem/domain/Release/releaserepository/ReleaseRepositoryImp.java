@@ -1,9 +1,8 @@
 package Capstone.MonitoringSystem.domain.Release.releaserepository;
 
 import Capstone.MonitoringSystem.domain.Release.Release;
-import Capstone.MonitoringSystem.domain.Release.ReleaseSearch;
+import Capstone.MonitoringSystem.domain.Search;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -23,16 +22,47 @@ public class ReleaseRepositoryImp implements ReleaseRepository{
     }
 
     @Override
-    public List<Release> findBySearch(ReleaseSearch releaseSearch) {
-        LocalDate recentWeek = LocalDate.now().minusDays(7);
-        if (releaseSearch.getName() == null && releaseSearch.getDate() == null) {
-            String query = "select r from Release r join fetch r.company join fetch r.stock " +
-                    "where r.releasedDate >= :recentWeek";
+    public List<Release> findBySearch(Search search) {
+        if ((search.getName() == null && search.getDate() == null) ||
+                search.getName().isEmpty() && search.getDate() == null) {
+            String query = "select r from Release r join fetch r.stock " +
+                    "join fetch r.company";
             return em.createQuery(query, Release.class)
-                    .setParameter("recentWeek", recentWeek)
                     .getResultList();
         }
-        else return null;
+        if (search.getName().isEmpty()) {
+            LocalDate minusDays = LocalDate.now().minusDays(search.getDate());
+            String query = "select r from Release r join fetch r.stock " +
+                    "join fetch r.company " +
+                    "where r.releasedDate >= :minusDays";
+            return em.createQuery(query, Release.class)
+                    .setParameter("minusDays", minusDays)
+                    .getResultList();
+        }
+        if (search.getDate() == null) {
+            LocalDate minusDays = LocalDate.now().minusDays(7);
+            String target = search.getName();
+            String query = "select r from Release r join fetch r.stock s " +
+                    "join fetch r.company " +
+                    "where r.releasedDate >= :minusDays " +
+                    "and s.name = :target";
+            return em.createQuery(query, Release.class)
+                    .setParameter("minusDays", minusDays)
+                    .setParameter("target", target)
+                    .getResultList();
+        }
+        else {
+            LocalDate minusDays = LocalDate.now().minusDays(search.getDate());
+            String target = search.getName();
+            String query = "select r from Release r join fetch r.stock s " +
+                    "join fetch r.company " +
+                    "where r.releasedDate >= :minusDays " +
+                    "and s.name = :target";
+            return em.createQuery(query, Release.class)
+                    .setParameter("minusDays", minusDays)
+                    .setParameter("target", target)
+                    .getResultList();
+        }
     }
 
     @Override

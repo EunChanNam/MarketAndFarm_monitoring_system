@@ -1,8 +1,7 @@
 package Capstone.MonitoringSystem.domain.Stock.stockrepository;
 
-import Capstone.MonitoringSystem.domain.Release.Release;
 import Capstone.MonitoringSystem.domain.Stock.Stock;
-import Capstone.MonitoringSystem.domain.Stock.StockSearch;
+import Capstone.MonitoringSystem.domain.Search;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -25,15 +24,15 @@ public class StockRepositoryImp implements StockRepository{
     }
 
     @Override
-    public List<Stock> findBySearch(StockSearch stockSearch) {
-        if ((stockSearch.getName() == null && stockSearch.getDate() == null) ||
-            stockSearch.getName().isEmpty() && stockSearch.getDate() == null) {
+    public List<Stock> findBySearch(Search search) {
+        if ((search.getName() == null && search.getDate() == null) ||
+            search.getName().isEmpty() && search.getDate() == null) {
             String query = "select s from Stock s join fetch s.storage";
             return em.createQuery(query, Stock.class)
                     .getResultList();
         }
-        if (stockSearch.getName().isEmpty()) {
-            LocalDate minusDays = LocalDate.now().minusDays(stockSearch.getDate());
+        if (search.getName().isEmpty()) {
+            LocalDate minusDays = LocalDate.now().minusDays(search.getDate());
             log.info("Date = {}", minusDays);
             String query = "select s from Stock s join fetch s.storage " +
                     "where s.stockedDate >= :minusDays";
@@ -41,10 +40,10 @@ public class StockRepositoryImp implements StockRepository{
                     .setParameter("minusDays", minusDays)
                     .getResultList();
         }
-        if (stockSearch.getDate() == null) {
+        if (search.getDate() == null) {
             LocalDate minusDays = LocalDate.now().minusDays(7);
             log.info("Date = {}", minusDays);
-            String target = stockSearch.getName();
+            String target = search.getName();
             String query = "select s from Stock s join fetch s.storage " +
                     "where s.stockedDate >= :minusDays " +
                     "and s.name = :target";
@@ -54,9 +53,9 @@ public class StockRepositoryImp implements StockRepository{
                     .getResultList();
         }
         else {
-            LocalDate minusDays = LocalDate.now().minusDays(stockSearch.getDate());
+            LocalDate minusDays = LocalDate.now().minusDays(search.getDate());
             log.info("Date = {}", minusDays);
-            String target = stockSearch.getName();
+            String target = search.getName();
             String query = "select s from Stock s join fetch s.storage " +
                     "where s.stockedDate >= :minusDays " +
                     "and s.name = :target";
