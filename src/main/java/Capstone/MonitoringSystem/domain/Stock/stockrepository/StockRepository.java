@@ -20,4 +20,6 @@ public interface StockRepository {
     public void remove(Stock stock);
 
     List<Stock> findAll();
+
+    List<String> findStockNamesByStorage(Long storageId);
 }

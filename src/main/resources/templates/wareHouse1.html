@@ -98,32 +98,14 @@
                 <!--막대그래프 부분 (aria-valuenow=?) ?에 값 입력하면 그래프 그려줌.-->
                 <div class="col-lg-12 order-lg-3">
                     <!-- 그래프 1-->
-                    <div th:each="stock : ${stocks}" class="progress-item">
+                    <div th:each="stockDto : ${stockDtos}" class="progress-item">
                         <div class="progress-title">
-                            <h6 th:text="${stock.name} + ' ' + ${stock.rate} + '%'">고추  <span class="progress-number pull-right"></span>%</h6>
+                            <h6 th:text="${stockDto.name} + ' ' + ${stockDto.rate} + '%'">고추  <span class="progress-number pull-right"></span>%</h6>
                         </div>
                         <div class="progress">
-                            <div th:aria-valuenow="${stock.rate}" class="progress-bar bg-brand progress-bar-striped" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div th:aria-valuenow="${stockDto.rate}" class="progress-bar bg-brand progress-bar-striped" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
-<!--                    &lt;!&ndash; 그래프 2&ndash;&gt;-->
-<!--                    <div class="progress-item">-->
-<!--                        <div class="progress-title">-->
-<!--                            <h6>들깨  <span class="progress-number pull-right"></span>%</h6>-->
-<!--                        </div>-->
-<!--                        <div class="progress">-->
-<!--                            <div class="progress-bar bg-success progress-bar-striped" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; 그래프 3&ndash;&gt;-->
-<!--                    <div class="progress-item">-->
-<!--                        <div class="progress-title">-->
-<!--                            <h6>참깨  <span class="progress-number pull-right"></span>%</h6>-->
-<!--                        </div>-->
-<!--                        <div class="progress">-->
-<!--                            <div class="progress-bar bg-info progress-bar-striped" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
 
                     <div class="listTable">
                         <table class="mobileTable phone breakpoint" id="table"

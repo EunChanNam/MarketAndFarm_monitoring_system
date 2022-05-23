@@ -102,4 +102,14 @@ public class StockRepositoryImp implements StockRepository{
         return em.createQuery(query, Stock.class)
                 .getResultList();
     }
+
+    @Override
+    public List<String> findStockNamesByStorage(Long storageId) {
+        String query = "select distinct s.name from Stock s " +
+                "join s.storage str " +
+                "where str.id = :storageId";
+        return em.createQuery(query, String.class)
+                .setParameter("storageId", storageId)
+                .getResultList();
+    }
 }
