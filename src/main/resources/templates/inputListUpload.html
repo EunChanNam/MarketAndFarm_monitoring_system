@@ -51,16 +51,13 @@
 <!--            <%&#45;&#45;            메뉴 리스트&#45;&#45;%>-->
             <div class="inner-nav">
                 <ul>
-                    <li class="menu-item-has-children menu-item-has-mega-menu"><a href="#"><span class="menu-item-span" style="color: black">입고리스트</span></a>
+                    <li class="menu-item-has-children menu-item-has-mega-menu"><a th:href="@{/stocks}" href="#"><span class="menu-item-span" style="color: black">입고리스트</span></a>
 
                     </li>
-                    <li class="menu-item-has-children menu-item-has-mega-menu"><a href="#"><span class="menu-item-span" style="color: black">출고리스트</span></a>
+                    <li class="menu-item-has-children menu-item-has-mega-menu"><a th:href="@{/releases}" href="#"><span class="menu-item-span" style="color: black">출고리스트</span></a>
 
                     </li>
-                    <li class="menu-item-has-children"><a href="#"><span class="menu-item-span" style="color: black">추가기능1</span></a>
-
-                    </li>
-                    <li class="menu-item-has-children"><a href="#"><span class="menu-item-span" style="color: black">추가기능2</span></a>
+                    <li class="menu-item-has-children"><a th:href="@{/statistics}"><span class="menu-item-span" style="color: black">통계페이지</span></a>
 
                     </li>
 
@@ -112,10 +109,10 @@
                                 품목 오류
                             </div>
                             <div class="col-md-12 form-group">
-                                <input th:field="*{quantity}" th:errorclass="field-error" class="form-control" type="text" placeholder="수량(TON)">
+                                <input th:field="*{quantity}" th:errorclass="field-error" class="form-control" type="text" placeholder="재고(TON)">
                             </div>
                             <div class="field-error" th:errors="*{quantity}">
-                                수량 오류
+                                재고 오류
                             </div>
                             <div class="col-md-12 form-group">
                                 <input th:field="*{dryingPlace}" class="form-control" type="text" placeholder="건조장">
@@ -169,7 +166,7 @@
     <div class="footer-widgets">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <!-- Text widget-->
                     <aside class="widget widget-text">
                         <div class="widget-title">
@@ -181,15 +178,16 @@
                         </div>
                     </aside>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <!-- Recent entries widget-->
                     <aside class="widget widget-recent-entries">
                         <div class="widget-title">
                             <h6>Links</h6>
                         </div>
                         <ul>
-                            <li><a href="#">입고리스트 바로가기</a></li>
-                            <li><a href="#">출고리스트 바로가기</a></li>
+                            <li><a th:href="@{/stocks}">입고리스트 바로가기</a></li>
+                            <li><a th:href="@{/releases}">출고리스트 바로가기</a></li>
+                            <li><a th:href="@{/statistics}">통계페이지 바로가기</a></li>
                         </ul>
                     </aside>
                 </div>

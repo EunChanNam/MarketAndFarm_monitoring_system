@@ -49,16 +49,13 @@
 
             <div class="inner-nav">
                 <ul>
-                    <li class="menu-item-has-children menu-item-has-mega-menu"><a href="#"><span class="menu-item-span">입고리스트</span></a>
+                    <li class="menu-item-has-children menu-item-has-mega-menu"><a th:href="@{/stocks}" href="#"><span class="menu-item-span" style="color: black">입고리스트</span></a>
 
                     </li>
-                    <li class="menu-item-has-children menu-item-has-mega-menu"><a href="#"><span class="menu-item-span">출고리스트</span></a>
+                    <li class="menu-item-has-children menu-item-has-mega-menu"><a th:href="@{/releases}" href="#"><span class="menu-item-span" style="color: black">출고리스트</span></a>
 
                     </li>
-                    <li class="menu-item-has-children"><a href="#"><span class="menu-item-span">추가기능1</span></a>
-
-                    </li>
-                    <li class="menu-item-has-children"><a href="#"><span class="menu-item-span">추가기능2</span></a>
+                    <li class="menu-item-has-children"><a th:href="@{/statistics}"><span class="menu-item-span" style="color: black">통계페이지</span></a>
 
                     </li>
 
@@ -118,7 +115,7 @@
                             <tr>
                                 <th data-field="bl_num" data-sortable="true">B/L 넘버</th>
                                 <th data-field="kind" data-sortable="true">품종</th>
-                                <th data-field="qunatity" data-sortable="true">수량(ton)</th>
+                                <th data-field="qunatity" data-sortable="true">재고(ton)</th>
                                 <th data-field="dry" data-sortable="true">건조장</th>
                                 <th data-field="price" data-sortable="true">단가</th>
                                 <th data-field="stockedDate" data-sortable="true">입고날짜</th>
@@ -128,7 +125,7 @@
                             <tr class="alaways" th:each="stock : ${stocks}">
                                 <th th:text="${stock.id}" data-field="bl_num" data-sortable="true">B/L 넘버</th>
                                 <th th:text="${stock.name}" data-field="kind" data-sortable="true">품종</th>
-                                <th th:text="${stock.quantity}" data-field="qunatity" data-sortable="true">수량(ton)</th>
+                                <th th:text="${stock.quantity}" data-field="qunatity" data-sortable="true">재고(ton)</th>
                                 <th th:text="${stock.dryingPlace}" data-field="dry" data-sortable="true">건조장</th>
                                 <th th:text="${stock.price}" data-field="price" data-sortable="true">단가</th>
                                 <th th:text="${stock.stockedDate}" data-field="stockedDate" data-sortable="true">입고날짜</th>
@@ -149,7 +146,7 @@
         <div class="footer-widgets">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <!-- Text widget-->
                         <aside class="widget widget-text">
                             <div class="widget-title">
@@ -161,15 +158,16 @@
                             </div>
                         </aside>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <!-- Recent entries widget-->
                         <aside class="widget widget-recent-entries">
                             <div class="widget-title">
                                 <h6>Links</h6>
                             </div>
                             <ul>
-                                <li><a href="#">입고리스트 바로가기</a></li>
-                                <li><a href="#">출고리스트 바로가기</a></li>
+                                <li><a th:href="@{/stocks}">입고리스트 바로가기</a></li>
+                                <li><a th:href="@{/releases}">출고리스트 바로가기</a></li>
+                                <li><a th:href="@{/statistics}">통계페이지 바로가기</a></li>
                             </ul>
                         </aside>
                     </div>
