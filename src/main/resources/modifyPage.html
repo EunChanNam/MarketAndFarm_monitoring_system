@@ -110,10 +110,10 @@
                                 품목 오류
                             </div>
                             <div class="col-md-12 form-group">
-                                <input th:text="${stock.quantity}" th:errorclass="field-error" class="form-control" type="text" placeholder="수량(TON)">
+                                <input th:text="${stock.quantity}" th:errorclass="field-error" class="form-control" type="text" placeholder="재고(TON)">
                             </div>
                             <div class="field-error" th:errors="*{quantity}">
-                                수량 오류
+                                재고 오류
                             </div>
                             <div class="col-md-12 form-group">
                                 <input th:text="${stock.dryingPlace}" class="form-control" type="text" placeholder="건조장">
@@ -164,7 +164,7 @@
     <div class="footer-widgets">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <!-- Text widget-->
                     <aside class="widget widget-text">
                         <div class="widget-title">
@@ -176,7 +176,7 @@
                         </div>
                     </aside>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <!-- Recent entries widget-->
                     <aside class="widget widget-recent-entries">
                         <div class="widget-title">
@@ -185,14 +185,17 @@
                         <ul>
                             <li><a href="#">입고리스트 바로가기</a></li>
                             <li><a href="#">출고리스트 바로가기</a></li>
+                            <li><a href="#">통계페이지 바로가기</a></li>
                         </ul>
                     </aside>
                 </div>
                 <div class="col-md-3">
 
+
                 </div>
 
                 <div class="col-md-3">
+
 
                 </div>
             </div>
