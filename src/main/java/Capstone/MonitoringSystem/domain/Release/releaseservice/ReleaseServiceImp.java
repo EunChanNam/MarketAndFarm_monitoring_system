@@ -36,4 +36,8 @@ public class ReleaseServiceImp implements ReleaseService{
 
         releaseRepository.remove(release);
     }
+
+    public List<Release> findAll() {
+        return releaseRepository.findAll();
+    }
 }

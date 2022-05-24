@@ -80,4 +80,11 @@ public class ReleaseRepositoryImp implements ReleaseRepository{
     public void remove(Release release) {
         em.remove(release);
     }
+
+    @Override
+    public List<Release> findAll() {
+        String query = "select r from Release r";
+        return em.createQuery(query, Release.class)
+                .getResultList();
+    }
 }

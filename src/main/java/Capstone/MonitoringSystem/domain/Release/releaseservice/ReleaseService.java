@@ -16,4 +16,6 @@ public interface ReleaseService {
     List<Release> findReleaseBySearch(Search search);
 
     void removeRelease(Long releaseId);
+
+    List<Release> findAll();
 }

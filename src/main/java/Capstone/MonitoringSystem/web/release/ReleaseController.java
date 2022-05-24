@@ -62,7 +62,7 @@ public class ReleaseController {
             rs.saveRelease(form.getPrice(), form.getQuantity(), form.getReleasedDate(), stock, company);
         }
 
-        return "redirect:/"; //todo 출고 리스트페이지 완성되면 수정
+        return "redirect:/releases"; //todo 출고 리스트페이지 완성되면 수정
     }
 
     @GetMapping("/releases")

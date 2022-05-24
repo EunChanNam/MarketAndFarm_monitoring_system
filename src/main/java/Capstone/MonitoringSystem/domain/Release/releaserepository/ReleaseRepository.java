@@ -14,4 +14,6 @@ public interface ReleaseRepository {
     Release findById(Long id);
 
     void remove(Release release);
+
+    List<Release> findAll();
 }
