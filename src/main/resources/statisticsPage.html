@@ -84,18 +84,35 @@
     <section class="module">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 order-lg-3">
+                <div class="col-lg-6 order-lg-3">
+                    <h3 style="text-align: center">월별 총 매출액</h3>
+                        <div class="container">
+                            <canvas id="myChart1"></canvas>
+                        </div>
+                </div>
+                <div class="col-lg-6 order-lg-3">
+                    <h3 style="text-align: center">월별 입고량</h3>
                     <div class="container">
-                        <canvas id="myChart"></canvas>
+                        <canvas id="barGraph1"></canvas>
+                    </div>
+                    <br><br><br><br>
+                </div>
+                <div><br><br></div>
+                <div class="col-lg-6 order-lg-3">
+                    <h3 style="text-align: center">순이익</h3>
+                    <div class="container">
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-3">
+                    <h3 style="text-align: center">월별 출고량</h3>
+                    <div class="container">
+                        <canvas id="barGraph2"></canvas>
                     </div>
                 </div>
             </div>
-            <div><br><br></div>
-            <div class="row align-items-center col-md-8 m-auto">
-                <div class="container">
-                    <canvas id="barGraph"></canvas>
-                </div>
-            </div>
+
+
 
 
 
@@ -148,9 +165,9 @@
     <!-- Footer end-->
 
     <script>
-        //월별 매출 그래프
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
+        //월별 매출 그래프 (월별 총 매출액)
+        var ctxLine1 = document.getElementById('myChart1').getContext('2d');
+        var chartLine1 = new Chart(ctxLine1, {
             // 챠트 종류를 선택
             type: 'line',
             // 챠트를 그릴 데이타
@@ -159,7 +176,7 @@
                 datasets: [{
 
                     //문구 단위로 바꾸려면 여기 수정
-                    label: '월별 매출액',
+                    label: '단위',
 
                     backgroundColor: 'transparent',
                     borderColor: 'red',
@@ -170,19 +187,76 @@
             options: {}
         });
 
-        //막대그래프
-        var ctx = document.getElementById('barGraph');
-        var myChart = new Chart(ctx, {
+        //월별 매출 그래프 (순이익)
+        var ctxLine2 = document.getElementById('myChart2').getContext('2d');
+        var chartLine2 = new Chart(ctxLine2, {
+            // 챠트 종류를 선택
+            type: 'line',
+            // 챠트를 그릴 데이타
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+
+                    //문구 단위로 바꾸려면 여기 수정
+                    label: '단위',
+
+                    backgroundColor: 'transparent',
+                    borderColor: 'red',
+                    //순서 맞춰서 데이터 넣으면 됩니당
+                    data: [5, 10, 5, 2, 20, 30, 45, 25, 10, 30, 40, 20]
+                }]
+            }, // 옵션
+            options: {}
+        });
+
+        //막대그래프(월별 입고량)
+        var ctxBar1 = document.getElementById('barGraph1');
+        var ChartBar1 = new Chart(ctxBar1, {
             type: 'bar',
             data: {
                 labels: ['총 입고량', '총 출고량'],
                 datasets: [{
 
                     //문구 단위로 바꾸려면 여기 수정
-                    label: '입고 및 출고',
+                    label: '단위(ton)',
 
                     //순서 맞춰서 데이터 넣으면 됩니당
                     data: [19, 12],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        //막대그래프(월별 출고량)
+        var ctxBar2 = document.getElementById('barGraph2');
+        var ChartBar2 = new Chart(ctxBar2, {
+            type: 'bar',
+            data: {
+                labels: ['총 입고량', '총 출고량'],
+                datasets: [{
+
+                    //문구 단위로 바꾸려면 여기 수정
+                    label: '단위(ton)',
+
+                    //순서 맞춰서 데이터 넣으면 됩니당
+                    data: [19, 9],
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 99, 132, 0.2)'
