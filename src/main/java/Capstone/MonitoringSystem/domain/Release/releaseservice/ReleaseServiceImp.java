@@ -33,6 +33,7 @@ public class ReleaseServiceImp implements ReleaseService{
     @Transactional
     public void removeRelease(Long releaseId) {
         Release release = releaseRepository.findById(releaseId);
+        release.getStock().addStock(release.getQuantity());
 
         releaseRepository.remove(release);
     }

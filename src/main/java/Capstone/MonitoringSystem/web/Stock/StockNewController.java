@@ -44,4 +44,34 @@ public class StockNewController {
 
         return "stockModifyPage";
     }
+
+    @PostMapping("/stocks/new")
+    public String stockInput(@Validated @ModelAttribute("form") StockInputForm form,
+                             BindingResult bindingResult) {
+
+        if (idDuplicatedCheck(form.getId())) {
+            bindingResult.rejectValue("id", "DuplicatedId");
+            return "inputListUpload";
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "inputListUpload";
+        }
+
+        stockService.saveStock(form.getId(), form.getName(), form.getDryingPlace(), form.getQuantity(),
+                form.getPrice(), form.getStockedDate(), form.getYield(), form.getStorageId());
+
+        return "redirect:/stocks";
+    }
+
+    private boolean idDuplicatedCheck(Long id) {
+        List<Stock> all = stockService.findAll();
+
+        for (Stock stock : all) {
+            if (stock.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -50,6 +50,10 @@ public class Stock {
         this.quantity -= quantity;
     }
 
+    public void addStock(Double quantity) {
+        this.quantity += quantity;
+    }
+
     public static Stock createStock(Long id, String name, String dryingPlace, Double quantity, Integer price, LocalDate stockedDate,
                                     Double yield, Storage storage) {
         Stock stock = new Stock(id, name, dryingPlace, quantity, price, stockedDate, yield);

@@ -7,17 +7,17 @@
     <meta name="author" content="">
     <title>Market&farm</title>
     <!-- Favicons-->
-    <link rel="shortcut icon" href="assets/images/favicon.png">
-    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/images/apple-touch-icon-114x114.png">
     <!-- Web Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600%7cPlayfair+Display:400i" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- Plugins-->
-    <link href="assets/css/plugins.min.css" rel="stylesheet">
+    <link href="/assets/css/plugins.min.css" rel="stylesheet">
     <!-- Template core CSS-->
-    <link href="assets/css/template.css" rel="stylesheet">
+    <link href="/assets/css/template.css" rel="stylesheet">
     <link href='css/list.css' rel='stylesheet' type='text/css'>
 
     <!-- 차트 링크 -->
@@ -84,18 +84,35 @@
     <section class="module">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 order-lg-3">
+                <div class="col-lg-6 order-lg-3">
+                    <h3 style="text-align: center">월별 총 매출액</h3>
                     <div class="container">
-                        <canvas id="myChart"></canvas>
+                        <canvas id="myChart1"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-3">
+                    <h3 style="text-align: center">월별 입고량</h3>
+                    <div class="container">
+                        <canvas id="barGraph1"></canvas>
+                    </div>
+                    <br><br><br><br>
+                </div>
+                <div><br><br></div>
+                <div class="col-lg-6 order-lg-3">
+                    <h3 style="text-align: center">순이익</h3>
+                    <div class="container">
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-3">
+                    <h3 style="text-align: center">월별 출고량</h3>
+                    <div class="container">
+                        <canvas id="barGraph2"></canvas>
                     </div>
                 </div>
             </div>
-            <div><br><br></div>
-            <div class="row align-items-center col-md-8 m-auto">
-                <div class="container">
-                    <canvas id="barGraph"></canvas>
-                </div>
-            </div>
+
+
 
 
 
@@ -148,9 +165,9 @@
     <!-- Footer end-->
 
     <script th:inline="javascript">
-        //월별 매출 그래프
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
+        //월별 매출 그래프 (월별 총 매출액)
+        var ctxLine1 = document.getElementById('myChart1').getContext('2d');
+        var chartLine1 = new Chart(ctxLine1, {
             // 챠트 종류를 선택
             type: 'line',
             // 챠트를 그릴 데이타
@@ -159,31 +176,90 @@
                 datasets: [{
 
                     //문구 단위로 바꾸려면 여기 수정
-                    label: '월별 매출액',
+                    label: '단위',
 
                     backgroundColor: 'transparent',
                     borderColor: 'red',
                     //순서 맞춰서 데이터 넣으면 됩니당
                     data: ["[[${monthTotal[0]}]]", "[[${monthTotal[1]}]]", "[[${monthTotal[2]}]]", "[[${monthTotal[3]}]]", "[[${monthTotal[4]}]]", "[[${monthTotal[5]}]]",
-                        "[[${monthTotal[6]}]]", "[[${monthTotal[7]}]]", "[[${monthTotal[8]}]]", "[[${monthTotal[9]}]]", "[[${monthTotal[10]}]]", "[[${monthTotal[11]}]]"]
+                            "[[${monthTotal[6]}]]", "[[${monthTotal[7]}]]", "[[${monthTotal[8]}]]", "[[${monthTotal[9]}]]", "[[${monthTotal[10]}]]", "[[${monthTotal[11]}]]"]
                 }]
             }, // 옵션
             options: {}
         });
 
-        //막대그래프
-        var ctx = document.getElementById('barGraph');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
+        //월별 매출 그래프 (순이익)
+        var ctxLine2 = document.getElementById('myChart2').getContext('2d');
+        var chartLine2 = new Chart(ctxLine2, {
+            // 챠트 종류를 선택
+            type: 'line',
+            // 챠트를 그릴 데이타
             data: {
-                labels: ['총 입고량', '총 출고량'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
 
                     //문구 단위로 바꾸려면 여기 수정
-                    label: '입고 및 출고',
+                    label: '단위',
+
+                    backgroundColor: 'transparent',
+                    borderColor: 'red',
+                    //순서 맞춰서 데이터 넣으면 됩니당
+                    data: ["[[${monthProfit[0]}]]", "[[${monthProfit[1]}]]", "[[${monthProfit[2]}]]", "[[${monthProfit[3]}]]", "[[${monthProfit[4]}]]", "[[${monthProfit[5]}]]",
+                        "[[${monthProfit[6]}]]", "[[${monthProfit[7]}]]", "[[${monthProfit[8]}]]", "[[${monthProfit[9]}]]", "[[${monthProfit[10]}]]", "[[${monthProfit[11]}]]"]
+                }]}, // 옵션
+            options: {}
+        });
+
+        //막대그래프(월별 입고량)
+        var ctxBar1 = document.getElementById('barGraph1');
+        var ChartBar1 = new Chart(ctxBar1, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+
+                    //문구 단위로 바꾸려면 여기 수정
+                    label: '단위(ton)',
 
                     //순서 맞춰서 데이터 넣으면 됩니당
-                    data: ["[[${totalStock}]]", "[[${totalRelease}]]"],
+                    data: ["[[${monthStocks[0]}]]", "[[${monthStocks[1]}]]", "[[${monthStocks[2]}]]", "[[${monthStocks[3]}]]", "[[${monthStocks[4]}]]", "[[${monthStocks[5]}]]",
+                        "[[${monthStocks[6]}]]", "[[${monthStocks[7]}]]", "[[${monthStocks[8]}]]", "[[${monthStocks[9]}]]", "[[${monthStocks[10]}]]", "[[${monthStocks[11]}]]"],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        //막대그래프(월별 출고량)
+        var ctxBar2 = document.getElementById('barGraph2');
+        var ChartBar2 = new Chart(ctxBar2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+
+                    //문구 단위로 바꾸려면 여기 수정
+                    label: '단위(ton)',
+
+                    //순서 맞춰서 데이터 넣으면 됩니당
+                    data: ["[[${monthReleases[0]}]]", "[[${monthReleases[1]}]]", "[[${monthReleases[2]}]]", "[[${monthReleases[3]}]]", "[[${monthReleases[4]}]]", "[[${monthReleases[5]}]]",
+                        "[[${monthReleases[6]}]]", "[[${monthReleases[7]}]]", "[[${monthReleases[8]}]]", "[[${monthReleases[9]}]]", "[[${monthReleases[10]}]]", "[[${monthReleases[11]}]]"],
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 99, 132, 0.2)'
@@ -234,24 +310,24 @@
 <script src="js/jquery.cookie.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <!-- Plugins-->
-<link href="assets/css/plugins.min.css" rel="stylesheet">
+<link href="/assets/css/plugins.min.css" rel="stylesheet">
 
-<script src="assets/js/custom/jquery.min.js"></script>
-<script src="assets/js/custom/popper.min.js"></script>
-<script src="assets/js/bootstrap/bootstrap.min.js"></script>
+<script src="/assets/js/custom/jquery.min.js"></script>
+<script src="/assets/js/custom/popper.min.js"></script>
+<script src="/assets/js/bootstrap/bootstrap.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-<script src="assets/js/custom/plugins.min.js"></script>
-<script src="assets/js/custom/custom.min.js"></script>
+<script src="/assets/js/custom/plugins.min.js"></script>
+<script src="/assets/js/custom/custom.min.js"></script>
 <!-- Favicons-->
-<link rel="shortcut icon" href="assets/images/favicon.png">
-<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
+<link rel="shortcut icon" href="/assets/images/favicon.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/images/apple-touch-icon-114x114.png">
 <!-- Web Fonts-->
 <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600%7cPlayfair+Display:400i" rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 <!-- Template core CSS-->
-<link href="assets/css/template.css" rel="stylesheet">
-<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="/assets/css/template.css" rel="stylesheet">
+<link href="/assets/css/bootstrap.css" rel="stylesheet">
 </body>
 </html>
