@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Market&farm</title>
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/images/apple-touch-icon-114x114.png">
+    <!-- Web Fonts-->
+    <link href="https:/fonts.googleapis.com/css?family=Poppins:400,500,600%7cPlayfair+Display:400i" rel="stylesheet">
+    <link href="https:/use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Plugins-->
+    <link href="/assets/css/plugins.min.css" rel="stylesheet">
+    <!-- Template core CSS-->
+    <link href="/assets/css/template.css" rel="stylesheet">
+    <link href='/css/list.css' rel='stylesheet' type='text/css'>
+    <style>
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Preloader-->
+<div class="page-loader">
+    <div class="page-loader-inner">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+</div>
+<!-- Preloader end-->
+
+<!-- Header-->
+<header class="header header-transparent">
+    <div class="container-fluid">
+        <!-- Brand-->
+        <div class="inner-header"><a th:href="@{/}" class="inner-brand" style="color: black" href="index.html">Market&Farm</a></div>
+        <!-- Navigation-->
+        <div class="inner-navigation collapse">
+            <div class="inner-nav">
+                <ul>
+                    <li class="menu-item-has-children menu-item-has-mega-menu"><a th:href="@{/stocks}" href="#"><span class="menu-item-span" style="color: black">입고리스트</span></a>
+
+                    </li>
+                    <li class="menu-item-has-children menu-item-has-mega-menu"><a th:href="@{/releases}" href="#"><span class="menu-item-span" style="color: black">출고리스트</span></a>
+
+                    </li>
+                    <li class="menu-item-has-children"><a th:href="@{/statistics}"><span class="menu-item-span" style="color: black">통계페이지</span></a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header end-->
+
+
+<!-- Wrapper-->
+<div class="wrapper">
+    <!-- Page Header-->
+    <section class="module-page-title bg-gray">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="page-title-desc">
+                        <h1 class="page-title-heading">출고 PAGE</h1>
+                        <!--p This theme will shake your world.-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Header end-->
+
+    <!-- Checkout-->
+    <section class="module">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 m-auto">
+                    <div class="heading-underline">
+                        <h5 class="m-b-30">출고LIST 입력</h5>
+                    </div>
+
+                    <div class="row form-row">
+                        <h6 class="m-t-10">&nbsp;&nbsp;입고 B/L넘버</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.id}" th:name="stockId" th:value="${stock.id}" class="form-control" type="text" readonly></div>
+                        </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;품목</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.name}" class="form-control" type="text"  readonly></div>
+                        </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;잔여 재고(TON)</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.quantity}" class="form-control" type="text"  readonly></div>
+                        </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;입고 단가</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.price}" class="form-control" type="text" readonly></div>
+                        </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;입고 날짜</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.stockedDate}" class="form-control" type="text" readonly></div>
+                        </div>
+                        <h6 class="m-t-10">&nbsp;&nbsp;창고 번호</h6>
+                        <div class="col-md-12 form-group">
+                            <div th:text="${stock.storage.id}" class="form-control" type="text" readonly></div>
+                        </div>
+                    </div>
+                    <form th:action="@{/releases/new}" th:object="${releaseForm}" method="post">
+                        <input th:name="stockId" th:value="${stock.id}" class="form-control" type="hidden">
+                        <div class="row form-row">
+                            <div class="col-md-12 form-group">
+                                <input th:field="*{price}" class="form-control" type="text" placeholder="출고 단가">
+                            </div>
+                            <div th:class="field-error" th:errors="*{price}">가격 오류</div>
+                            <div class="col-md-12 form-group">
+                                <input th:field="*{quantity}" th:errorclass="field-error" class="form-control" type="text" placeholder="출고량">
+                            </div>
+                            <div th:class="field-error" th:errors="*{quantity}">재고 오류</div>
+                            <div class="col-md-12 form-group">
+                                <input th:field="*{companyName}" class="form-control" type="text" placeholder="회사명">
+                            </div>
+                            <div th:class="field-error" th:errors="*{companyName}">회사명 오류</div>
+                            <div class="col-md-12 form-group">
+                                출고 날짜: <input type="date" name="startday" th:field="*{releasedDate}">
+                            </div>
+                            <div th:class="field-error" th:errors="*{releasedDate}">날짜 오류</div>
+                        </div>
+                        <div class="text-right">
+                            <input type="submit" class="btn btn-brand">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout end-->
+</div>
+
+
+<!-- Footer-->
+<footer class="footer">
+    <div class="footer-widgets">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Text widget-->
+                    <aside class="widget widget-text">
+                        <div class="widget-title">
+                            <h6>About Us</h6>
+                        </div>
+                        <div class="textwidget">
+                            <p>주식회사 마켓앤팜</p>
+                            <p>e-mail: market1016@...</p>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-md-6">
+                    <!-- Recent entries widget-->
+                    <aside class="widget widget-recent-entries">
+                        <div class="widget-title">
+                            <h6>Links</h6>
+                        </div>
+                        <ul>
+                            <li><a th:href="@{/stocks}">입고리스트 바로가기</a></li>
+                            <li><a th:href="@{/releases}">출고리스트 바로가기</a></li>
+                            <li><a th:href="@{/statistics}">통계페이지 바로가기</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+
+                <div class="col-md-3">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+<!-- Off canvas-->
+<div class="off-canvas-sidebar">
+    <div class="off-canvas-sidebar-wrapper">
+        <div class="off-canvas-header"><a class="off-canvas-close" href="#"><span class="ti-close"></span></a></div>
+        <div class="off-canvas-content">
+            <!-- Text widget-->
+            <aside class="widget widget-text">
+                <div class="textwidget">
+                    <p class="text-center"><img src="/assets/images/logo-light-2.png" alt="" width="80px"></p>
+                    <p class="text-center">See how users experience your website in realtime to see changes.</p>
+                </div>
+            </aside>
+            <!-- Recent portfolio widget-->
+            <aside class="widget widget-recent-works">
+                <ul>
+                    <li><a href="#"><img src="/assets/images/widgets/1.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="/assets/images/widgets/2.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="/assets/images/widgets/3.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="/assets/images/widgets/4.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="/assets/images/widgets/5.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="/assets/images/widgets/6.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="/assets/images/widgets/7.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="/assets/images/widgets/8.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="/assets/images/widgets/9.jpg" alt=""></a></li>
+                </ul>
+            </aside>
+            <!-- Social Icons-->
+            <ul class="social-icons text-center">
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Off canvas end-->
+
+<!-- To top button--><a class="scroll-top" href="#top"><i class="fas fa-angle-up"></i></a>
+
+<!-- Scripts-->
+<script src="/assets/js/custom/jquery.min.js"></script>
+<script src="/assets/js/custom/popper.min.js"></script>
+<script src="/assets/js/bootstrap/bootstrap.min.js"></script>
+<script src="https:/maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
+<script src="/assets/js/custom/plugins.min.js"></script>
+<script src="/assets/js/custom/custom.min.js"></script>
+</body>
+</html>
