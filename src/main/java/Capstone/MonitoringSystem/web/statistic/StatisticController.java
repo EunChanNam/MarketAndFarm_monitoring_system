@@ -42,7 +42,7 @@ public class StatisticController {
         List<Integer> monthProfit = getMonthProfit(yearStocks, monthTotal);
 
         //월별 입고
-        List<Double> monthStocks = getMonthStocks(yearStocks);
+        List<Double> monthStocks = getMonthStocks(yearStocks, yearReleases);
 
         //월별 출고
         List<Double> monthReleases = getMonthReleases(yearReleases);
@@ -55,7 +55,7 @@ public class StatisticController {
         return "statisticsPage";
     }
 
-    private List<Double> getMonthStocks(List<Stock> yearStocks) {
+    private List<Double> getMonthStocks(List<Stock> yearStocks, List<Release> yearReleases) {
         List<Double> monthStock = new ArrayList<>();
         for (int i = 0; i <= 12; i++) {
             double totalStock = 0.0;
@@ -63,6 +63,12 @@ public class StatisticController {
                 LocalDate stockDate = stock.getStockedDate();
                 if (stockDate.getMonthValue() == i) {
                     totalStock += stock.getQuantity();
+                }
+            }
+            for (Release release : yearReleases) {
+                LocalDate releasedDate = release.getReleasedDate();
+                if (releasedDate.getMonthValue() == i) {
+                    totalStock += release.getQuantity();
                 }
             }
             monthStock.add(totalStock);
